@@ -3,6 +3,6 @@ layout: post
 title:  "Resume"
 date:   2016-11-2 12:32:11
 categories: Resume
-tags: 2.Resume
+tags: Resume
 ---
 123123123123
