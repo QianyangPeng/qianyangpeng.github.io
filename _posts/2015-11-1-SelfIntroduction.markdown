@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Self Introduction"
-date:   2016-11-1 12:32:11
+date:   2016-11-6 12:32:11
 categories: Introduction
 tags: Introduction
 ---
