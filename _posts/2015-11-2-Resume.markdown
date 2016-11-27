@@ -2,7 +2,7 @@
 layout: post
 title:  "Resume"
 date:   2016-11-2 12:32:11
-categories: 2.Resume
+categories: Resume
 tags: 2.Resume
 ---
 123123123123
