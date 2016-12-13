@@ -12,3 +12,5 @@ This is a Chinese chess game based on Pygame and PyOpenGL. You can run this game
 Developer: Qianyang Peng, Hongru Zhu
 
 Repository Link: [https://github.com/QianyangPeng/3DChess](https://github.com/QianyangPeng/3DChess)
+
+[Back](https://qianyangpeng.github.io/)
