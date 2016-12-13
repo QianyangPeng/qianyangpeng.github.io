@@ -1,8 +1,0 @@
----
-layout: post
-title:  "Skills"
-date:   2016-11-27 12:32:11
-categories: Skills
-tags: Skills
----
-123123123123
