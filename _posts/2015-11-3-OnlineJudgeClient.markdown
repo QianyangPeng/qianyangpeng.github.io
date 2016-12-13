@@ -9,11 +9,13 @@ tags: Projects
 
 Online Judge Clients (OJC) is a integrated developing environment(IDE) specially designed for online judge site users. They can use this software view OJ problems, write and run code in different languages, automatically test example input & output, submit your solutions, and even share your questions and codes with other users.
 
-Development Group: Kerosene
+Website Support: [SJTUOJ](https://acm.sjtu.edu.cn/OnlineJudge/), [POJ](http://poj.org/)
 
-Group Leader: Qianyang Peng
+Language Support: C++, C, Java, Python
 
-Group members: Hongru Zhu
+*Development Group: Kerosene
+*Group Leader: Qianyang Peng
+*Group members: Hongru Zhu
                 Fan Wu
                 He Li
                 Neng Li
