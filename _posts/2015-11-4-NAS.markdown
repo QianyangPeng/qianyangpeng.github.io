@@ -2,14 +2,14 @@
 layout: post
 title:  "Raspberry Pi based NAS System"
 date:   2016-11-4 12:32:11
-categories: Project
-tags: Project
+categories: Projects
+tags: Projects
 ---
 
 ![NAS](https://qianyangpeng.github.io/statics/nas/ftpinfo_index.png)
 
 This is a Network Attached Storage system based on Raspberry Pi II. 
 
-[PDF](https://qianyangpeng.github.io/statics/nas/nas_report.pdf), [PPT](https://qianyangpeng.github.io/statics/nas/CNFINAL.pptx)
+Introduction: [PDF](https://qianyangpeng.github.io/statics/nas/nas_report.pdf), [PPT](https://qianyangpeng.github.io/statics/nas/CNFINAL.pptx)
 
 [Back](https://qianyangpeng.github.io/)
