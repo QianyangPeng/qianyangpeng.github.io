@@ -13,9 +13,9 @@ Website Support: [SJTUOJ](https://acm.sjtu.edu.cn/OnlineJudge/), [POJ](http://po
 
 Language Support: C++, C, Java, Python
 
-*Development Group: Kerosene
-*Group Leader: Qianyang Peng
-*Group members: Hongru Zhu
++Development Group: Kerosene
++Group Leader: Qianyang Peng
++Group members: Hongru Zhu
                 Fan Wu
                 He Li
                 Neng Li
