@@ -13,12 +13,14 @@ Website Support: [SJTUOJ](https://acm.sjtu.edu.cn/OnlineJudge/), [POJ](http://po
 
 Language Support: C++, C, Java, Python
 
-+Development Group: Kerosene
-+Group Leader: Qianyang Peng
-+Group members: Hongru Zhu
-                Fan Wu
-                He Li
-                Neng Li
+*Development Group: Kerosene
+
+*Group Leader: Qianyang Peng
+
+*Group members: Hongru Zhu,
+                Fan Wu,
+                He Li,
+                Neng Li,
 
 Repository link (Contact me for direct access): [https://hydorah.visualstudio.com/Project%20OJC](https://hydorah.visualstudio.com/Project%20OJC)
 
