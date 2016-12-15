@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Raspberry Pi based NAS System"
+title:  "Project: Raspberry Pi based NAS System"
 date:   2016-11-2 12:32:11
 categories: Projects
 tags: Projects

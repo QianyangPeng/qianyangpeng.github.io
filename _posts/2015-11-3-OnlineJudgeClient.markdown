@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Online Judge Clients (OJC)"
+title:  "Project: Online Judge Clients (OJC)"
 date:   2016-11-3 12:32:11
 categories: Projects
 tags: Projects
