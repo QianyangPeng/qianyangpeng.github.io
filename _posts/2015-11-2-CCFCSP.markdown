@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Certificate: CCF CERTIFIED SOFTWARE PROFESSIONAL"
+title:  "Certificate: CCF CSP"
 date:   2016-11-1 12:32:11
 categories: Certificates
 tags: Certificates
