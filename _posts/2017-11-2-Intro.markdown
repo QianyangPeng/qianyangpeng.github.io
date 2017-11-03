@@ -1,5 +1,9 @@
 ---
 layout: default
+title:  "Self introduction"
+date:   2016-11-6 12:32:11
+categories: Blog
+tags: Blog
 ---
 <div id="home" class="container">
   <h1>Qiangyang Peng 彭乾旸</h1>
