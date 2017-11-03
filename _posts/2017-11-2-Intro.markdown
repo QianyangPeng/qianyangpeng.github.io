@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Self introduction"
+title:  "About me"
 date:   2016-11-6 12:32:11
 categories: Blog
 tags: Blog
@@ -8,7 +8,7 @@ tags: Blog
 <div id="home" class="container">
   <h1>Qiangyang Peng 彭乾旸</h1>
   <dl>
-   <dd style="margin-left:0px;">Senior student, Shanghai Jiaotong University, IEEE Honor Class</dd>
+   <dd style="margin-left:0px;">Senior student, University of Illinois at Urbana-Champaign</dd>
   </dl>
   <p>Welcome to my homepage.</p>
 
