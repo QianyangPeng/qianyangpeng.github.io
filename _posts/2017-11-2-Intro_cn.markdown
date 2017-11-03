@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "ジコショウカイ"
-date:   2016-11-4 12:32:11
+title:  "自我介绍"
+date:   2016-11-5 12:32:11
 categories: Blog
 tags: Blog
 ---
