@@ -17,6 +17,6 @@ In Oncology, we have clinical practice guidelines to help us decide the rehabili
 - Endocrine therapy （内分泌治疗）
 - targeted therapy （靶向治疗）
 
-There are many factors that can influence the decision of choosing a therapy. A classical example is the radiation therapy is not suitable for patients older than 70. Given a 
-<／small>
+There are many factors that can influence the decision of choosing a therapy. A classical example is “radiation therapy is not suitable for patients older than 70”. Given a 
+</small>
 [Back](https://qianyangpeng.github.io/)
