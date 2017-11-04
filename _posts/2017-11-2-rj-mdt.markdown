@@ -6,7 +6,7 @@ categories: Blog
 tags: Blog
 ---
 
-~Using Disjunctive Normal Form to encoded rules based Decision Tree~
+~Using Rule File and Disjunctive Normal Form to implement rules based Decision Tree~
 
 As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. While from the back-end, you can achieve this by having a delicate data structure and architecture design, to make your system robust, extensible and flexible.
 
@@ -59,16 +59,24 @@ A decision tree can be implemented with a lot of nested if-then-else sentences, 
 
 The second idea is to use Disjunctive Normal Form to encode the rules in the rule file. As is mentioned above, we have several modules, including visualization, decision making and editor module, that need to read and edit the rule file. Also, every node of the decision tree could have a complicated structure. In my design, a decision tre file is a JSON file, a decision tree is a dictionary, and a node in the decision tree is a tuple. The structure of a tuple is:
 
-Index | Content | Type                                |example|
-:-----|:--------|:------------------------------------|:-|
-0     | NodeID  | int                                 | 2 |
-1     | Rule    | list of (list of (3tuple of string))| [[("Age",">","30"),("ALN","==","False")],["HR","==","True"]] |
-2     | IsLeaf  | bool                                | False |
-3     | ChildID | int                                 | 16 |
-4     | LeafStr | list of string                      | [] |
+|Index | Content | Type                                |example|
+|:-----|:--------|:------------------------------------|:-|
+|0     | NodeID  | int                                 | 2 |
+|1     | Rule    | list of (list of (3tuple of 'a))    | [[("Age",">",30),("ALN","==","False")],["HR","==","True"]] |
+|2     | IsLeaf  | bool                                | False |
+|3     | ChildID | list of int                       | [15, 16] |
+|4     | LeafStr | list of string                      | [] |
 
-The *Rule* part is a "list of (list of (3tuple of string))", which should be parsed in Disjunctive Normal Form.
+The *Rule* part is a "list of (list of (3tuple of 'a))", which should be parsed in Disjunctive Normal Form. So the example means:
 
+(Age>30 && ALN(-))||(HR(+))
+
+For any node in the decision tree, we can use a "list of (list of (3tuple of 'a))" to encode it. This form can perfectly be parsed and used in the visualization, decision making and editor module. Advantage includes:
+
+- Node format is consistent for any node, so the parsing code can be short and concise.
+- Easy to implement the visualization module, every tree node has an ID and the children node IS list.
+- Easy to implement the decision module, only need a rule file name.
+- Easy to implement the edit module, including modify a node, add a node and delete a node.
 
 
 [Back](https://qianyangpeng.github.io/)
