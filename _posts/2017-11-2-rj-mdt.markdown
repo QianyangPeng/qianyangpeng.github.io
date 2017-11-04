@@ -48,7 +48,15 @@ Thus the targeted module need to have the features below:
 
 To design this decision tree parsing module, I used two ideas to achieve the four features above:
 
-- Separate rule file with code file
+- Separate rule file and code file
 - Using Disjunctive Normal Form to encode the rules in the rule file
+
+A decision tree can be implemented with a lot of nested if-then-else sentences, but a wiser solution is to use the code part only play the role of a driver. That is, no rule is written into code, and the work of code is only to read and parse the rule file, thus dynamically building a decision tree. Separating rule file and code file is having many advantages:
+
+- Users can choose which rule file to use. A set of rule files can be maintained simultaneously. That is, we can keep track of different versions of rule file and the different rule of different guidelines.
+- It gets easier to design the corresponding modules. The rule file can be used in visualization module, decision module and editor module. It is a good example of "high cohesion and low coupling".
+- The code gets much shorter, and the debugging process gets much easier.
+
+
 
 [Back](https://qianyangpeng.github.io/)
