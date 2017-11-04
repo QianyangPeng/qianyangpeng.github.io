@@ -8,6 +8,6 @@ tags: Blog
 
 ~[http://www.papersbook.org/](http://www.papersbook.org/)~
 
-<center><embed src="https://qianyangpeng.github.io/statics/thesis_qianyangpeng.pdf" width="850" height="600"></center>
+<center><embed src="https://qianyangpeng.github.io/statics/thesis_qianyangpeng.pdf" width="800" height="600"></center>
 
 [Back](https://qianyangpeng.github.io/)
