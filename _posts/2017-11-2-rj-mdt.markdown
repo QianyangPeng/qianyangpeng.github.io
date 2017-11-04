@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Bolg: Using Disjunctive Normal Form to encoded rules based Decision Tree"
+title:  "Blog: Computer Science and Medical Industry"
 date:   2017-11-3 12:32:11
 categories: Blog
 tags: Blog
 ---
 
-<small>As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. While from the back-end, you can achieve this by having a delicate data structure and architecture design, to make your system robust, extensible and flexible.
+-Using Disjunctive Normal Form to encoded rules based Decision Tree-
+
+As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. While from the back-end, you can achieve this by having a delicate data structure and architecture design, to make your system robust, extensible and flexible.
 
 I faced with this challenge when I had an internship in Shanghai Ruijin Hospital. It is an open source solution so we can discuss it here together. (The content below is containing words about cancer and some of them may be discomforting.)
 
@@ -18,5 +20,5 @@ In Oncology, we have clinical practice guidelines to help us decide the rehabili
 - targeted therapy （靶向治疗）
 
 There are many factors that can influence the decision of choosing a therapy. A classical example is “radiation therapy is not suitable for patients older than 70”. Given a 
-</small>
+
 [Back](https://qianyangpeng.github.io/)
