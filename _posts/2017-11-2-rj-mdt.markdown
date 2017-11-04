@@ -6,6 +6,6 @@ categories: Blog
 tags: Blog
 ---
 
-
+As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. From the back-end, you can achieve this by a delicate data structure and architecture design, to make your system robust, extensible and flexible.
 
 [Back](https://qianyangpeng.github.io/)
