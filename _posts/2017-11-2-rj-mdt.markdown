@@ -12,7 +12,7 @@ As a computer scientist, not only can you work in technological companies, but a
 
 I faced with this challenge when I had an internship in Shanghai Ruijin Hospital. It is an open source solution so we can discuss it here together. The department I work in is the breast cancer department.(The content below is containing words about cancer and some of them may be discomforting.)
 
-In Oncology, we have clinical practice guidelines to help us decide the rehabilitation therapy for patients after surgery. Typically there are 4 types of therapies:
+In Oncology, we have clinical practice guidelines to help us decide the *rehabilitation therapy* for patients after surgery. Typically there are 4 types of therapies:
 
 - radiation therapy
 - chemotherapy
@@ -33,10 +33,22 @@ There are many factors that can influence the decision of choosing a therapy. A 
 
 So in terms of chemotherapy, the main laboratory indicators we need to know is *HR*, *HER-2*, *ALN* and the size of foci.
 
-Before computer science technology is introduced into this hospital. This decision process is basically based on doctor's experience, with the reference of such a decision table. Doctors never fully depend on this table because the decision model is not linear. For example, no chemotherapy should be conduct on people older than 70, but how about a 69 year-old patient? No chemotherapy should be conduct on people whose foci size not bigger than 0.5cm, but how about a patient whose foci is 0.501cm? So actually this is a complicated problem and really in need of experienced experts to make decision based on their experience accumulated during their life.
+Before computer science technology is introduced into this hospital. This decision process is basically based on doctor's experience, with the reference of such a decision table. Doctors never fully depend on this table because the decision model is not linear. For example, no chemotherapy should be conduct on people older than 70, but how about a 69 year-old patient? No chemotherapy should be conduct on people whose foci size not bigger than 0.5cm, but how about a patient whose foci is 0.501cm? So actually this is a complicated problem and really in need of experienced experts to make decision based on their rich experience.
 
 However, with the introduction of computer science related technology, this process could be fit into some machine learning models such as neural networks. After Training the data with large data-set of past medical record of our hospital, we can get a model with can infer the decision result with the maximum likelihood. We are not going to let machines to completely play the role of expert, but the decision result of machine is a good subsidiary to assist the discussing process of experts meetings.
 
-To build all these things from scratch, the first step is to implement a basic module to directly give the infer result based on the given decision trees without considering any non-linear feature of the model. This is the basis of all the matching learning model which is all based on these decision trees. And this is exactly my part of work of my internship. I need to encode two set of decision trees, each set with 4 big categories of therapies.
+To build all these things from scratch, the first step is to implement a basic module to directly give the infer result based on given decision trees without considering any non-linear feature of the model. This is the basis of all the machine learning model which is all based on these decision trees. And this is exactly my part of work of my internship. I need to encode two set of decision trees, each set with 4 big categories of therapies.
+
+Thus the targeted module need to have the features below:
+
+- Accurate representation of the decision tree
+- Straightforward visualization of the decision tree
+- Let doctors modify the decision tree easily, without needing to directly modify the code and data file
+- High Maintainability after software delivery
+
+To design this decision tree parsing module, I used two ideas to achieve the four features above:
+
+- Separate rule file with code file
+- Using Disjunctive Normal Form to encode the rules in the rule file
 
 [Back](https://qianyangpeng.github.io/)
