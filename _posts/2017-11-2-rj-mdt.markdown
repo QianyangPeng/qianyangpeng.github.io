@@ -69,7 +69,7 @@ The second idea is to use Disjunctive Normal Form to encode the rules in the rul
 
 The *Rule* part is a "list of (list of (3tuple of 'a))", which should be parsed in Disjunctive Normal Form. So the example means:
 
-(Age>30 && ALN(-))||(HR(+))
+*(Age>30 && ALN(-))||(HR(+))*
 
 For any node in the decision tree, we can use a "list of (list of (3tuple of 'a))" to encode it. This form can perfectly be parsed and used in the visualization, decision making and editor module. Advantage includes:
 
