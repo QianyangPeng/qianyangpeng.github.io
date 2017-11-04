@@ -14,10 +14,10 @@ I faced with this challenge when I had an internship in Shanghai Ruijin Hospital
 
 In Oncology, we have clinical practice guidelines to help us decide the *rehabilitation therapy* for patients after surgery. Typically there are 4 types of therapies:
 
-- radiation therapy
-- chemotherapy
+- Radiation therapy
+- Chemotherapy
 - Endocrine therapy
-- targeted therapy
+- Targeted therapy
 
 In each of the therapy, there are many kinds of sub-therapy to choose from. For example, if the chosen therapy is chemotherapy, we need to go a step further and choose a specific therapy from:
 
@@ -56,6 +56,16 @@ A decision tree can be implemented with a lot of nested if-then-else sentences, 
 - Users can choose which rule file to use. A set of rule files can be maintained simultaneously. That is, we can keep track of different versions of rule file and the different rule of different guidelines.
 - It gets easier to design the corresponding modules. The rule file can be used in visualization module, decision module and editor module. It is a good example of "high cohesion and low coupling".
 - The code gets much shorter, and the debugging process gets much easier.
+
+The second idea is to use Disjunctive Normal Form to encode the rules in the rule file. As is mentioned above, we have several modules, including visualization, decision making and editor module, that need to read and edit the rule file. Also, every node of the decision tree could have a complicated structure. In my design, a decision tre file is a JSON file, a decision tree is a dictionary, and a node in the decision tree is a tuple. The structure of a tuple is:
+
+Index | Content | Type
+------|---------|--------
+0     | NodeID  | int
+1     | Rule    | 2D list
+2     | IsLeaf  | bool
+2     | ChildID | int
+2     | LeafStr | list of string
 
 
 
