@@ -6,6 +6,16 @@ categories: Blog
 tags: Blog
 ---
 
-As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. From the back-end, you can achieve this by a delicate data structure and architecture design, to make your system robust, extensible and flexible.
+As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. While from the back-end, you can achieve this by having a delicate data structure and architecture design, to make your system robust, extensible and flexible.
+
+I faced with this challenge when I had an internship in Shanghai Ruijin Hospital. It is an open source solution so let us discuss it here together. The content below is containing words about cancer and some of them may be discomforting.
+
+In oncology, we have clinical practice guidelines to help us decide the rehabilitation therapy for patients after surgery. Typically there are 4 types of therapies:
+
+- radiation therapy （放疗）
+- chemotherapy （化疗）
+- Endocrine therapy （内分泌治疗）
+- targeted therapy （靶向治疗）
+
 
 [Back](https://qianyangpeng.github.io/)
