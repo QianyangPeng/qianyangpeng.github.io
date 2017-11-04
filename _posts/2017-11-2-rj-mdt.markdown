@@ -1,24 +1,34 @@
 ---
 layout: post
-title:  "Blog: Computer Science and Medical Industry"
+title:  "Blog: My Medical Industry Experience"
 date:   2017-11-3 12:32:11
 categories: Blog
 tags: Blog
 ---
 
--Using Disjunctive Normal Form to encoded rules based Decision Tree-
+~Using Disjunctive Normal Form to encoded rules based Decision Tree~
 
 As a computer scientist, not only can you work in technological companies, but also you can work with people from all trades and professions. However, some people are not really good at using computers, such as elder medical practitioners. That is, you need to resolve the dilemma of a high accessibility and a complicated functionality. From the front-end, you can implement a powerful interface, with a user-friendly interaction design. While from the back-end, you can achieve this by having a delicate data structure and architecture design, to make your system robust, extensible and flexible.
 
-I faced with this challenge when I had an internship in Shanghai Ruijin Hospital. It is an open source solution so we can discuss it here together. (The content below is containing words about cancer and some of them may be discomforting.)
+I faced with this challenge when I had an internship in Shanghai Ruijin Hospital. It is an open source solution so we can discuss it here together. The department I work in is the breast cancer department.(The content below is containing words about cancer and some of them may be discomforting.)
 
 In Oncology, we have clinical practice guidelines to help us decide the rehabilitation therapy for patients after surgery. Typically there are 4 types of therapies:
 
-- radiation therapy （放疗）
-- chemotherapy （化疗）
-- Endocrine therapy （内分泌治疗）
-- targeted therapy （靶向治疗）
+- radiation therapy
+- chemotherapy
+- Endocrine therapy
+- targeted therapy
 
-There are many factors that can influence the decision of choosing a therapy. A classical example is “radiation therapy is not suitable for patients older than 70”. Given a 
+In each of the therapy, there are many kinds of sub-therapy to choose from. For example, if the chosen therapy is chemotherapy, we need to go a step further and choose a specific therapy from:
+
+- P
+- Tcb
+- Ec-T(wp)
+- ddAC-ddP
+- etc
+
+There are many factors that can influence the decision of choosing a therapy. A classical example is “a radiation therapy is not suitable for patients older than 70”. If we have a complete medical record of a patient, we can follow a guideline to make a decision, that which rehabilitation therapy we should to choose to apply on him/her. A famous guideline is called *NCCN Clinical Practice Guidelines in Oncology*, in which NCCN stands for *National Comprehensive Cancer Network*. The decision tree of choosing a specific chemotherapy is:
+
+![Nccn](https://qianyangpeng.github.io/static/MDT/nccnchomo.png)
 
 [Back](https://qianyangpeng.github.io/)
