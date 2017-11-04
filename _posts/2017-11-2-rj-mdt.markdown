@@ -27,10 +27,10 @@ In each of the therapy, there are many kinds of sub-therapy to choose from. For 
 - ddAC-ddP
 - etc
 
-There are many factors that can influence the decision of choosing a therapy. A classical example is “a radiation therapy is not suitable for patients older than 70”. If we have a complete medical record of a patient, we can follow a guideline to make a decision, that which rehabilitation therapy we should to choose to apply on him/her. A famous guideline is called *NCCN Clinical Practice Guidelines in Oncology*, in which NCCN stands for *National Comprehensive Cancer Network*. The decision tree of choosing a specific chemotherapy is:
+There are many factors that can influence the decision of choosing a therapy. A classical example is "a radiation therapy is not suitable for patients older than 70". If we have a complete medical record of a patient, we can follow a guideline to make a decision, that which rehabilitation therapy we should to choose to apply on him/her. A famous guideline is called *NCCN Clinical Practice Guidelines in Oncology*, in which NCCN stands for *National Comprehensive Cancer Network*. The decision tree of choosing a specific chemotherapy is:
 
 ![Nccn](https://qianyangpeng.github.io/statics/MDT/nccnchomo.png)
 
-
+So in terms of chemotherapy, the main laboratory indicators we need to know is *HR*, *HER-2*, *ALN* and the size of foci.
 
 [Back](https://qianyangpeng.github.io/)
