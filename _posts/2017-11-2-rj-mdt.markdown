@@ -59,13 +59,15 @@ A decision tree can be implemented with a lot of nested if-then-else sentences, 
 
 The second idea is to use Disjunctive Normal Form to encode the rules in the rule file. As is mentioned above, we have several modules, including visualization, decision making and editor module, that need to read and edit the rule file. Also, every node of the decision tree could have a complicated structure. In my design, a decision tre file is a JSON file, a decision tree is a dictionary, and a node in the decision tree is a tuple. The structure of a tuple is:
 
-Index | Content | Type
-------|---------|--------
-0     | NodeID  | int
-1     | Rule    | 2D list
-2     | IsLeaf  | bool
-2     | ChildID | int
-2     | LeafStr | list of string
+Index | Content | Type                               |example
+------|:-------:|------------------------------------|
+0     | NodeID  | int                                | 2
+1     | Rule    | list of (list of (3tuple of strin))| [[("Age",">","30"),("ALN","==","False")],["HR","==","True"]]
+2     | IsLeaf  | bool                               | False
+2     | ChildID | int                                | 16
+2     | LeafStr | list of string                     | []
+
+
 
 
 
