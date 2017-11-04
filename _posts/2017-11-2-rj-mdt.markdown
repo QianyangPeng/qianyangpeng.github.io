@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "Problem Solving: Using Disjunctive Normal Form to encoded rules based Decision Tree"
+date:   2016-11-3 12:32:11
+categories: Blog
+tags: Blog
+---
+
+
+
+[Back](https://qianyangpeng.github.io/)
