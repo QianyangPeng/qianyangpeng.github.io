@@ -8,6 +8,6 @@ tags: Blog
 
 ~Service Package Recommendation for Mashup Creation via Mashup Textual Description Mining~
 
-<center><embed src="https://qianyangpeng.github.io/statics/P1_QianyangPeng.pdf" width="700" height="1000"></center>
+<center><embed src="https://qianyangpeng.github.io/statics/P1_QianyangPeng.pdf" width="800" height="1000"></center>
 
 [Back](https://qianyangpeng.github.io/)
