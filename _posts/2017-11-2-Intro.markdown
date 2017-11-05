@@ -21,8 +21,8 @@ tags: Blog
   <ul>
    <li>Qi Gu, Jian Cao, <b>Qianyang Peng</b>, ”Service Package Recommendation for Mashup Creation via Mashup Textual Description Mining,” <i>IEEE ICWS 2016</i> (Accepted) <a href="https://qianyangpeng.github.io/statics/P1_QianyangPeng.pdf">(PDF)</a></li>
    <li>Xinzhe Fu, Zhiying Xu, <b>Qianyang Peng</b>, Luoyi Fu, Xinbing Wang, ”Complexity vs. Optimality: Unraveling Source-Destination Connection in Uncertain Graphs,” <i>IEEE INFOCOM 2017</i> (Accepted) <a href="https://qianyangpeng.github.io/statics/P2_QianyangPeng.pdf">(PDF)</a></li>
-   <li> Xinzhe Fu, Zhiying Xu, <b>Qianyang Peng</b>, Jie You, Luoyi Fu, Xinbing Wang, Songwu Lu, ”ConMap: Optimizing Multicast Energy
-in Delay-constrained Mobile Wireless Networks,” <i>ACM MobiHoc 2017</i> (Accepted)</li>
+   <li> Xinzhe Fu, Zhiying Xu, <b>Qianyang Peng</b>, Jie You, Luoyi Fu, Xinbing Wang, Songwu Lu, ”ConMap: Optimizing Multicast Energy in Delay-constrained Mobile Wireless Networks,” <i>ACM MobiHoc 2017</i> (Accepted) <a href="https://dl.acm.org/citation.cfm?id=3084047">(URL)</a></li>
+   <li> Luoyi Fu, Xinzhe Fu, Zhiying Xu, <b>Qianyang Peng</b>, et al., ”Determining Source-Destination Connectivity in Uncertain Networks: Modeling and Solutions” <i>IEEE/ACM ToN 2017</i> (Accepted) <a href="http://ieeexplore.ieee.org/abstract/document/7999283/metrics">(URL)</a></li></li>
   </ul>
   <p>My Supervisors. They are super nice professors that had helped me a lot during my undergraduate study and research:</p>
   <ul>
