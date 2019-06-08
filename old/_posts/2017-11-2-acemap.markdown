@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Blog: Academic Searching Platform"
+date:   2017-11-2 12:32:11
+categories: Blog
+tags: Blog
+---
+
+~[http://www.papersbook.org/](http://www.papersbook.org/)~
+
+<center><embed src="https://qianyangpeng.github.io/statics/thesis_qianyangpeng.pdf" width="750" height="1000"></center>
+
+[Back](https://qianyangpeng.github.io/)

@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\newcommand{\CC}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\scriptsize\bf \#}}
+\geometry{left=0.75cm, right=0.75cm, top=0.8cm, bottom=0.8cm}
+\setitemize{itemsep=5pt,rightmargin=1em,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+\begin{document}
+\pagestyle{empty}
+\newcommand{\cvtitle}[5]{ {\huge\bfseries\scshape #1} \vspace{1em}\\
+\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
+#2 & #4 \\ #3 & #5 \\
+\end{tabular*}
+\vspace{3pt} \rule{\textwidth}{1.25pt}}
+
+\makeatletter
+\renewcommand{\section}{\@startsection {section} {12} {\z@} {0.2\baselineskip} {0.1\baselineskip} {\normalfont\large\scshape\bfseries}}
+\makeatother
+
+\newenvironment{entrylist}{% 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll} 
+}{
+\end{tabular*} 
+}
+\newcommand{\entry}[4]{% 
+#1&\parbox[t]{.8\textwidth}{% 
+\textbf{#2}%  
+#3\\% 
+#4\vspace{\parsep}% 
+}\\}
+
+\hfill Resume for Computer Science \& Engineering M.S. @ UMGrad, Fall 2017
+
+\cvtitle{Qianyang Peng} %你的姓名
+{Shanghai Jiao Tong University(SJTU)} %地址栏1
+{Website: \href{https://qianyangpeng.github.io/}{https://qianyangpeng.github.io/}} %地址栏2
+{Phone: +86 187-2177-5689} %电话
+{Email: az950512@sjtu.edu.cn} %邮箱
+
+\section{\underline{EDUCATION}}
+%\begin{}
+\textbf{Shanghai Jiao Tong University}\hfill\textbf{Shanghai, China}
+
+\emph{B.S in Computer Science and Technology, IEEE Honor Class\footnote{Class website: http://english.seiee.sjtu.edu.cn/english/info/8338.htm. IEEE Honor Class, also known as IEEE Pilot Class, is an elite-education program of SJTU.}}\hfill Sept. 2013--Jun. 2017(\emph{expected})
+
+\textbf{Average score: 88.18, Ranking: 10/72}\quad\textbf{GPA: Overall 3.70/4.0, Major 3.81/4.0}
+\vspace{\parsep}
+
+\section{\underline{PUBLICATIONS}}
+{\begin{itemize}
+\item Qi Gu, Jian Cao, \textbf{Qianyang Peng}, "Service Package Recommendation for Mashup Creation via Mashup Textual Description Mining," \emph{IEEE ICWS 2016} (Accepted)
+\item Xinzhe Fu, Zhiying Xu, \textbf{Qianyang Peng}, Luoyi Fu, Xinbing Wang, "Complexity vs. Optimality: Unraveling Source-Destination Connection in Uncertain Graphs," \emph{IEEE INFOCOM 2017} (Accepted)
+\item Luoyi Fu, Xinzhe Fu, Zhiying Xu, \textbf{Qianyang Peng}, Xinbing Wang, Songwu Lu, "ConMap: Optimizing Multicast Energy in Delay-constrained Mobile Wireless Networks," \emph{IEEE/ACM ToN} (Submitted)
+\end{itemize}}\vspace{\parsep}
+
+\section{\underline{EXPERIENCE}}
+\begin{tabular*}{0.97\textwidth}{@{\extracolsep{\fill}}lr }
+{\textbf{Ruijin Hospital, Shanghai Jiao Tong University School of Medicine}}&{Aug. 2016 -- Oct. 2016}\vspace{1pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\emph{System Developer,} \textbf{involved in the back-end development of their Intelligence Medical Diagnosis System}}\vspace{2pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\parbox{0.95\linewidth}{\begin{itemize}\setlength{\itemsep}{2pt}
+\item Implemented in Ruby a module that gives the recommended treatment method according to patients' medical records.
+\item Designed a disjunctive normal form standard rule format and encoded rules into .json files based on \emph{NCCN} guidelines.
+\item Optimized the data format to let doctors without any programming skills make rule updates and amendments easily.
+\end{itemize}}}\vspace{\parsep}\\
+{\textbf{Intelligent Internet of Things Research Center, SJTU}}&{Feb. 2016 -- Present}\vspace{1pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\emph{Supervised by Prof. Xinbing Wang,} \textbf{co-authored two papers on graph theory; back-end development of Acemap}}\vspace{2pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\parbox{0.95\linewidth}{\begin{itemize}\setlength{\itemsep}{2pt}
+\item Conducted experiment on large-scale datasets including citation network, P2P network and Twitter Ego network.
+\item Designed a Markov Decision Process (MDP) based exact algorithm for calculating the optimal testing strategy.
+\item After submitted the two papers above, I am now developing the search engine of our lab's academic site Acemap.
+\end{itemize}}}\vspace{\parsep}\\
+{\textbf{Lab for Collaborative Computing and Intelligence Technology, SJTU}}&{Jul. 2015 -- Dec. 2015}\vspace{1pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\emph{Supervised by Prof. Jian Cao, } \textbf{co-authored a paper on natural language processing and text mining}}\vspace{2pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\parbox{0.95\linewidth}{\begin{itemize}\setlength{\itemsep}{2pt}
+\item Involved in the idea formation of using discourse parsing in service package recommendation for mashup creation.
+\item Implemented discourse segmenting and parsing modules. Built syntactic tree based service relationship network.
+\item Built a recommendation system with a three-layer architecture providing supportive data for our theoretical study.
+\end{itemize}}}\vspace{\parsep}\\
+{\textbf{Experienced Group Leader in Course Projects}}\vspace{4pt}\\
+\multicolumn{2}{@{\extracolsep{\fill}}l}{\parbox{0.95\linewidth}{\begin{itemize}\setlength{\itemsep}{2pt}
+\item Acted as group leader in projects of courses including Software Engineering, Machine Learning, Computer Network and many other CS related courses. Skilled in programming, managing group work and giving presentations.
+\item Representative work:
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item A 3D Chinese chess game based on pygame and OpenGL;
+\item An Integrated Development Environment(IDE) designed for Online Judge users;
+\item A search engine website supporting both text search and image search;
+\item An multi-functional Network Attached Storage(NAS) system based on Raspberry Pi.
+\end{itemize}
+\end{itemize}}}\vspace{\parsep}\\
+\end{tabular*}\vspace{\parsep}
+
+\section{\underline{CERTIFICATES AND AWARDS}}
+{\begin{itemize}
+\item China Computer Federation Certified Software Professional \textbf{(Top 1.5\%)} \hfill Apr. 2016
+\item Xindong First Level Enterprise Scholarship \textbf{(Top 5\%)}\hfill Apr. 2016
+\item China Undergraduate Mathematical Contest in Modeling, \textbf{National First Prize} \hfill Dec. 2015
+\item Academic Excellence Scholarship of SJTU \textbf{(Top 10\%)}\hfill 2015 \& 2016
+\end{itemize}}\vspace{\parsep}
+
+\section{\underline{SKILLS}}
+{\begin{itemize}
+\item Programming: C/\CC, \CS, Python, Ruby, PHP, SQL, etc.
+\item Languages: Mandarin(native), English(GRE:323+3.5/TOEFL:100), Japanese(JLPT N1 (Highest Level):123/180)
+\item Others: Linux, Vim, \LaTeX
+\end{itemize}}
+\end{document}
