@@ -1,2 +1,188 @@
-<h1> New Site Under Construction </h1>
-Old site could be found at https://qianyangpeng.github.io/old
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Qianyang Peng</title>
+<meta name="description" content="Qianyang Peng — software engineer at Google. Personal site and projects." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='56' font-family='system-ui'%3EQ%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #c0392b;
+    --card: #ffffff;
+    --border: #e7e5df;
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111111;
+      --fg: #ececec;
+      --muted: #9a9a9a;
+      --accent: #ff7a6b;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.25);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 96px 24px 120px;
+  }
+  @media (max-width: 560px) {
+    main { padding: 56px 20px 80px; }
+    body { font-size: 16px; }
+  }
+  .name {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .name-zh {
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 10px;
+    font-size: 1.4rem;
+  }
+  .tagline {
+    color: var(--muted);
+    margin: 0 0 40px;
+    font-size: 1rem;
+  }
+  .tagline a { color: inherit; }
+  .tagline a:hover { color: var(--fg); }
+  section { margin-top: 48px; }
+  h2 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+  p { margin: 0 0 14px; }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  a:hover { border-bottom-color: var(--accent); }
+
+  .project {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+    color: inherit;
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .project:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.06);
+    border-color: var(--accent);
+  }
+  @media (prefers-color-scheme: dark) {
+    .project:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.3);
+    }
+  }
+  .project-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .project-title .zh {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .project-title .en {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .project-blurb {
+    color: var(--fg);
+    font-size: 0.95rem;
+    margin: 0 0 10px;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .project-tags span {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 10px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 4px;
+  }
+  .links a {
+    color: var(--fg);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+  }
+  .links a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1 class="name">Qianyang Peng<span class="name-zh">彭千阳</span></h1>
+  <p class="tagline">Software engineer at Google · Seattle</p>
+
+  <section>
+    <h2>About</h2>
+    <p>I build software for a living and tinker with language, sound, and systems for fun. Previously: MS CS at UIUC, BS at SJTU. Published on test-case prioritization (ISSTA 2020). Speaks Chinese, English, and Japanese (N1).</p>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <a class="project" href="https://qianyangpeng.github.io/chinese-rhyme-finder/">
+      <div class="project-title">
+        <span class="zh">押韵发现器</span>
+        <span class="en">chinese-rhyme-finder</span>
+      </div>
+      <p class="project-blurb">A Chinese multi-syllable rhyme tool for rappers and lyricists. Not a dictionary — a discovery engine that surfaces clever rhyme clusters from a 30k-phrase corpus.</p>
+      <div class="project-tags">
+        <span>TypeScript</span><span>SvelteKit</span><span>Tailwind</span><span>GitHub Pages</span>
+      </div>
+    </a>
+  </section>
+
+  <section>
+    <h2>Elsewhere</h2>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/qianyangpeng/">LinkedIn</a>
+      <a href="https://github.com/QianyangPeng">GitHub</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>
