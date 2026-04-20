@@ -257,6 +257,203 @@
     .sg-card-body { flex-direction: column; align-items: stretch; gap: 8px; }
     .sg-card-garden { justify-content: center; }
   }
+
+  /* ----- Chinese Rhymes card (custom style — mirrors the site's signature pinyin-over-char rhyme chip) ----- */
+  .project-rhyme {
+    display: block;
+    padding: 3px;
+    border-radius: 18px;
+    background: linear-gradient(
+      90deg,
+      #7ec4ff, #34d399, #fbbf24, #b89464, #7ec4ff,
+      #34d399, #fbbf24, #b89464, #7ec4ff
+    );
+    background-size: 300% 100%;
+    animation: rhyme-border-slide 14s linear infinite;
+    box-shadow: 0 0 16px rgba(52, 211, 153, 0.18), 0 4px 18px rgba(0, 0, 0, 0.07);
+    border: none;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 24px;
+  }
+  .project-rhyme:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(52, 211, 153, 0.35), 0 10px 28px rgba(0, 0, 0, 0.12);
+    border-color: transparent;
+  }
+  .project-rhyme:hover { border-bottom-color: transparent; }
+  @media (prefers-color-scheme: dark) {
+    .project-rhyme {
+      box-shadow: 0 0 22px rgba(52, 211, 153, 0.3), 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .rhyme-card-body {
+    background: linear-gradient(135deg, #fbfaef 0%, #f4ede0 60%, #e9dec8 100%);
+    border-radius: 15px;
+    padding: 20px 22px;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    min-height: 150px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rhyme-card-body::before {
+    /* Giant 韵 watermark in vermillion — evokes the 印章 stamp aesthetic */
+    content: "韵";
+    position: absolute;
+    right: -30px;
+    bottom: -50px;
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-size: 240px;
+    color: rgba(180, 50, 48, 0.06);
+    font-weight: bold;
+    pointer-events: none;
+    line-height: 1;
+    user-select: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rhyme-card-body {
+      background: linear-gradient(135deg, #1a2321 0%, #202b28 60%, #261f1c 100%);
+    }
+    .rhyme-card-body::before { color: rgba(255, 122, 107, 0.1); }
+  }
+
+  .rhyme-card-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .rhyme-line { display: flex; gap: 2px; }
+
+  .rhyme-char {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 26px;
+    padding: 3px 4px 2px;
+    border-radius: 5px;
+    transition: background 0.25s ease;
+  }
+  .rhyme-char.rhyme-hit { background: rgba(16, 150, 85, 0.16); }
+  @media (prefers-color-scheme: dark) {
+    .rhyme-char.rhyme-hit { background: rgba(52, 211, 153, 0.2); }
+  }
+
+  .rhyme-py {
+    font-family: ui-monospace, "SF Mono", "DejaVu Sans Mono", monospace;
+    font-size: 0.62rem;
+    color: #a8a090;
+    line-height: 1;
+    margin-bottom: 3px;
+    font-weight: 400;
+  }
+  .rhyme-char.rhyme-hit .rhyme-py {
+    color: #0c6544;
+    font-weight: 600;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rhyme-py { color: #9a9081; }
+    .rhyme-char.rhyme-hit .rhyme-py { color: #6ee7b7; }
+  }
+
+  .rhyme-cn {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #2a2a2a;
+    line-height: 1;
+  }
+  .rhyme-char.rhyme-hit .rhyme-cn {
+    color: #0c6544;
+    font-weight: 700;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rhyme-cn { color: #ece4d2; }
+    .rhyme-char.rhyme-hit .rhyme-cn { color: #6ee7b7; }
+  }
+
+  .rhyme-card-text {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .project-rhyme .project-title .zh {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.04em;
+  }
+  .project-rhyme .project-title .en {
+    font-family: "Noto Serif", "Georgia", serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: #6b6157;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  @media (prefers-color-scheme: dark) {
+    .project-rhyme .project-title .zh { color: #f5efdc; }
+    .project-rhyme .project-title .en { color: #a8a090; }
+  }
+  .project-rhyme .project-blurb {
+    color: #3d362d;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  @media (prefers-color-scheme: dark) {
+    .project-rhyme .project-blurb { color: #d4cebd; }
+  }
+
+  .rhyme-tag {
+    border: 1px solid rgba(180, 140, 80, 0.3) !important;
+    background: rgba(255, 255, 255, 0.5);
+    color: #5a4a30 !important;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    padding: 2px 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rhyme-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18) !important;
+      color: #d4cebd !important;
+    }
+  }
+
+  @keyframes rhyme-border-slide {
+    from { background-position: 0% 50%; }
+    to   { background-position: 300% 50%; }
+  }
+  /* On hover: each line's highlighted chars bounce in sequence —
+     like three phrases "chiming" in on the same rhyme */
+  .project-rhyme:hover .rhyme-line:nth-child(1) .rhyme-char.rhyme-hit {
+    animation: rhyme-chime 1.8s ease-in-out 0s infinite;
+  }
+  .project-rhyme:hover .rhyme-line:nth-child(2) .rhyme-char.rhyme-hit {
+    animation: rhyme-chime 1.8s ease-in-out 0.2s infinite;
+  }
+  .project-rhyme:hover .rhyme-line:nth-child(3) .rhyme-char.rhyme-hit {
+    animation: rhyme-chime 1.8s ease-in-out 0.4s infinite;
+  }
+  @keyframes rhyme-chime {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+
+  @media (max-width: 480px) {
+    .rhyme-card-body { flex-direction: column; align-items: stretch; gap: 14px; padding: 16px 14px; }
+    .rhyme-card-cluster { align-self: center; }
+    .rhyme-cn { font-size: 1.15rem; }
+    .rhyme-char { min-width: 22px; }
+  }
 </style>
 </head>
 <body>
@@ -371,14 +568,41 @@
       </div>
     </a>
 
-    <a class="project" href="https://qianyangpeng.github.io/chinese-rhyme-finder/">
-      <div class="project-title">
-        <span class="zh">最好的中文押韵网站</span>
-        <span class="en">Best Chinese Rhyme Finding Website</span>
-      </div>
-      <p class="project-blurb">A Chinese multi-syllable rhyme tool for rappers and lyricists. Not a dictionary — a discovery engine that surfaces clever rhyme clusters from a 30k-phrase corpus.</p>
-      <div class="project-tags">
-        <span>TypeScript</span><span>SvelteKit</span><span>Tailwind</span><span>GitHub Pages</span>
+    <a class="project-rhyme" href="https://qianyangpeng.github.io/chinese-rhyme-finder/">
+      <div class="rhyme-card-body">
+        <div class="rhyme-card-cluster" aria-hidden="true">
+          <!-- Three real rhyming phrases from the site: 桂华静候 / 伟大领袖 / 肥马轻裘
+               all share the -ou tail rhyme on their last 2 syllables -->
+          <div class="rhyme-line">
+            <span class="rhyme-char"><span class="rhyme-py">guì</span><span class="rhyme-cn">桂</span></span>
+            <span class="rhyme-char"><span class="rhyme-py">huá</span><span class="rhyme-cn">华</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">jìng</span><span class="rhyme-cn">静</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">hòu</span><span class="rhyme-cn">候</span></span>
+          </div>
+          <div class="rhyme-line">
+            <span class="rhyme-char"><span class="rhyme-py">wěi</span><span class="rhyme-cn">伟</span></span>
+            <span class="rhyme-char"><span class="rhyme-py">dà</span><span class="rhyme-cn">大</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">lǐng</span><span class="rhyme-cn">领</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">xiù</span><span class="rhyme-cn">袖</span></span>
+          </div>
+          <div class="rhyme-line">
+            <span class="rhyme-char"><span class="rhyme-py">féi</span><span class="rhyme-cn">肥</span></span>
+            <span class="rhyme-char"><span class="rhyme-py">mǎ</span><span class="rhyme-cn">马</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">qīng</span><span class="rhyme-cn">轻</span></span>
+            <span class="rhyme-char rhyme-hit"><span class="rhyme-py">qiú</span><span class="rhyme-cn">裘</span></span>
+          </div>
+        </div>
+
+        <div class="rhyme-card-text">
+          <div class="project-title">
+            <span class="zh">押韵集</span>
+            <span class="en">Chinese Rhymes</span>
+          </div>
+          <p class="project-blurb">中文多音节押韵词典。80 万条短语、10 个开源语料库，算法挖掘双押到八押，给写歌词、说唱、诗词的人用。</p>
+          <div class="project-tags">
+            <span class="rhyme-tag">TypeScript</span><span class="rhyme-tag">SvelteKit</span><span class="rhyme-tag">Tailwind</span><span class="rhyme-tag">GitHub Pages</span>
+          </div>
+        </div>
       </div>
     </a>
   </section>
