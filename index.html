@@ -150,6 +150,113 @@
     padding-bottom: 2px;
   }
   .links a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+  /* ----- Sugar Garden card (custom style — breaks the portfolio default on purpose) ----- */
+  .project-sg {
+    display: block;
+    padding: 5px;
+    border-radius: 22px;
+    background: linear-gradient(
+      90deg,
+      #ff5c6c, #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c,
+      #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c
+    );
+    background-size: 400% 100%;
+    animation: sg-rainbow-slide 10s linear infinite;
+    box-shadow: 0 0 20px rgba(255, 210, 74, 0.28), 0 4px 18px rgba(0, 0, 0, 0.07);
+    border: none;
+    text-decoration: none;
+    color: #23331f;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 24px;
+  }
+  .project-sg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 32px rgba(255, 210, 74, 0.45), 0 10px 28px rgba(0, 0, 0, 0.12);
+    border-color: transparent;
+  }
+  .project-sg:hover { border-bottom-color: transparent; }   /* override base a:hover rule */
+  .sg-card-body {
+    background: linear-gradient(135deg, #dcecc1 0%, #bcd99a 55%, #d9b88a 100%);
+    border-radius: 18px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    min-height: 140px;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (prefers-color-scheme: dark) {
+    .project-sg { box-shadow: 0 0 24px rgba(255, 210, 74, 0.35), 0 6px 20px rgba(0, 0, 0, 0.4); }
+    .sg-card-body { background: linear-gradient(135deg, #3e5330 0%, #57733f 60%, #6a5632 100%); }
+    .project-sg .project-blurb { color: #e8efd9; }
+    .project-sg .project-title .en { color: #a8b896; }
+    .sg-tag { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: #e8efd9 !important; }
+  }
+
+  .sg-card-garden {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+    align-items: flex-end;
+  }
+  .sg-card-flower {
+    transform-origin: 50% 100%;
+    animation: sg-sway 6.5s ease-in-out infinite;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.18));
+  }
+  .sg-card-flower.sg-f2 { animation-delay: -2s; }
+  .sg-card-flower.sg-f3 { animation-delay: -4s; filter: drop-shadow(0 0 8px rgba(255,210,74,0.6)) drop-shadow(0 3px 3px rgba(0,0,0,0.2)); }
+  .project-sg:hover .sg-card-flower {
+    animation: sg-gust 2.6s ease-in-out infinite;
+  }
+
+  .sg-card-text { flex: 1; min-width: 0; }
+  .project-sg .project-title .zh {
+    font-family: "ZCOOL KuaiLe", "Noto Sans SC", system-ui;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #23331f;
+  }
+  @media (prefers-color-scheme: dark) {
+    .project-sg .project-title .zh { color: #f3f8ee; }
+  }
+  .project-sg .project-blurb {
+    color: #3b4f32;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .sg-tag {
+    border: 1px solid rgba(35, 51, 31, 0.3) !important;
+    background: rgba(255, 255, 255, 0.4);
+    color: #23331f !important;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    padding: 2px 10px;
+  }
+
+  @keyframes sg-rainbow-slide {
+    from { background-position: 0% 50%; }
+    to   { background-position: 400% 50%; }
+  }
+  @keyframes sg-sway {
+    0%,100% { transform: rotate(-2deg); }
+    50%     { transform: rotate(2deg); }
+  }
+  @keyframes sg-gust {
+    0%   { transform: rotate(0deg); }
+    20%  { transform: rotate(-7deg); }
+    45%  { transform: rotate(5deg); }
+    65%  { transform: rotate(-3deg); }
+    85%  { transform: rotate(1deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @media (max-width: 480px) {
+    .sg-card-body { flex-direction: column; align-items: stretch; gap: 8px; }
+    .sg-card-garden { justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -158,6 +265,112 @@
   <p class="tagline">Software engineer at Google · Seattle</p>
   <section>
     <h2>Projects</h2>
+
+    <a class="project-sg" href="https://qianyangpeng.github.io/sugar-garden/">
+      <div class="sg-card-body">
+        <div class="sg-card-garden" aria-hidden="true">
+          <!-- N sunflower -->
+          <svg viewBox="0 0 100 140" width="52" height="73" class="sg-card-flower sg-f1">
+            <path d="M 50 140 Q 50 90 50 50" stroke="#5a8f5e" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="40" cy="100" rx="9" ry="4.5" fill="#7ab985" stroke="#3b6e2b" stroke-width="1" transform="rotate(-30 40 100)"/>
+            <g transform="translate(50 40) scale(1.06)">
+              <defs>
+                <g id="sg-sun-petal"><ellipse cx="0" cy="-17" rx="5" ry="12" fill="#ffd24a" stroke="#7c4a1d" stroke-width="1.2"/></g>
+              </defs>
+              <use href="#sg-sun-petal" transform="rotate(0)"/>
+              <use href="#sg-sun-petal" transform="rotate(30)"/>
+              <use href="#sg-sun-petal" transform="rotate(60)"/>
+              <use href="#sg-sun-petal" transform="rotate(90)"/>
+              <use href="#sg-sun-petal" transform="rotate(120)"/>
+              <use href="#sg-sun-petal" transform="rotate(150)"/>
+              <use href="#sg-sun-petal" transform="rotate(180)"/>
+              <use href="#sg-sun-petal" transform="rotate(210)"/>
+              <use href="#sg-sun-petal" transform="rotate(240)"/>
+              <use href="#sg-sun-petal" transform="rotate(270)"/>
+              <use href="#sg-sun-petal" transform="rotate(300)"/>
+              <use href="#sg-sun-petal" transform="rotate(330)"/>
+              <circle cx="0" cy="0" r="9" fill="#7c4a1d" stroke="#2b2033" stroke-width="1.8"/>
+              <circle cx="-3" cy="-2" r="1.2" fill="#ffd24a" opacity="0.7"/>
+            </g>
+          </svg>
+
+          <!-- SR moonflower -->
+          <svg viewBox="0 0 100 140" width="54" height="76" class="sg-card-flower sg-f2">
+            <path d="M 50 140 Q 50 90 50 50" stroke="#5a8f5e" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="40" cy="100" rx="9" ry="4.5" fill="#7ab985" stroke="#3b6e2b" stroke-width="1" transform="rotate(-30 40 100)"/>
+            <g transform="translate(50 40) scale(1.06)">
+              <defs>
+                <g id="sg-moon-petal"><path d="M 0 0 Q -8 -8 -6 -20 Q 0 -24 6 -20 Q 8 -8 0 0 Z" fill="#e0e6ff" stroke="#8a7dca" stroke-width="1.4"/></g>
+              </defs>
+              <use href="#sg-moon-petal" transform="rotate(0)"/>
+              <use href="#sg-moon-petal" transform="rotate(45)"/>
+              <use href="#sg-moon-petal" transform="rotate(90)"/>
+              <use href="#sg-moon-petal" transform="rotate(135)"/>
+              <use href="#sg-moon-petal" transform="rotate(180)"/>
+              <use href="#sg-moon-petal" transform="rotate(225)"/>
+              <use href="#sg-moon-petal" transform="rotate(270)"/>
+              <use href="#sg-moon-petal" transform="rotate(315)"/>
+              <circle cx="0" cy="0" r="6" fill="#b892ff"/>
+              <circle cx="-15" cy="-15" r="1.6" fill="#fff" opacity="0.9">
+                <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="18" cy="-10" r="1.2" fill="#fff" opacity="0.7">
+                <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.4s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+          </svg>
+
+          <!-- UR starlight -->
+          <svg viewBox="0 0 100 140" width="58" height="81" class="sg-card-flower sg-f3">
+            <path d="M 50 140 Q 50 90 50 50" stroke="#5a8f5e" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="40" cy="100" rx="9" ry="4.5" fill="#7ab985" stroke="#3b6e2b" stroke-width="1" transform="rotate(-30 40 100)"/>
+            <g transform="translate(50 40) scale(1.18)">
+              <defs>
+                <g id="sg-star-outer"><path d="M 0 0 L -4 -14 L 0 -28 L 4 -14 Z" fill="#ffd24a" stroke="#c28c1f" stroke-width="0.8"/></g>
+                <g id="sg-star-inner"><path d="M 0 0 L -2.5 -8 L 0 -18 L 2.5 -8 Z" fill="#ffffff" opacity="0.85"/></g>
+              </defs>
+              <use href="#sg-star-outer" transform="rotate(0)"/>
+              <use href="#sg-star-outer" transform="rotate(36)"/>
+              <use href="#sg-star-outer" transform="rotate(72)"/>
+              <use href="#sg-star-outer" transform="rotate(108)"/>
+              <use href="#sg-star-outer" transform="rotate(144)"/>
+              <use href="#sg-star-outer" transform="rotate(180)"/>
+              <use href="#sg-star-outer" transform="rotate(216)"/>
+              <use href="#sg-star-outer" transform="rotate(252)"/>
+              <use href="#sg-star-outer" transform="rotate(288)"/>
+              <use href="#sg-star-outer" transform="rotate(324)"/>
+              <use href="#sg-star-inner" transform="rotate(18)"/>
+              <use href="#sg-star-inner" transform="rotate(54)"/>
+              <use href="#sg-star-inner" transform="rotate(90)"/>
+              <use href="#sg-star-inner" transform="rotate(126)"/>
+              <use href="#sg-star-inner" transform="rotate(162)"/>
+              <use href="#sg-star-inner" transform="rotate(198)"/>
+              <use href="#sg-star-inner" transform="rotate(234)"/>
+              <use href="#sg-star-inner" transform="rotate(270)"/>
+              <use href="#sg-star-inner" transform="rotate(306)"/>
+              <use href="#sg-star-inner" transform="rotate(342)"/>
+              <circle cx="0" cy="0" r="8" fill="#fff5a0" stroke="#c28c1f" stroke-width="1.5"/>
+              <circle cx="0" cy="0" r="4" fill="#ffffff" opacity="0.9">
+                <animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+          </svg>
+        </div>
+
+        <div class="sg-card-text">
+          <div class="project-title">
+            <span class="zh">糖糖花园</span>
+            <span class="en">Sugar Garden</span>
+          </div>
+          <p class="project-blurb">一家人共用的儿童糖分追踪 PWA。抽卡机制收集 35 种花，糖吃得越健康，明天抽到稀有花的概率越高。</p>
+          <div class="project-tags">
+            <span class="sg-tag">React</span><span class="sg-tag">Cloudflare Workers</span><span class="sg-tag">D1</span><span class="sg-tag">PWA</span><span class="sg-tag">SVG</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
     <a class="project" href="https://qianyangpeng.github.io/chinese-rhyme-finder/">
       <div class="project-title">
         <span class="zh">最好的中文押韵网站</span>
