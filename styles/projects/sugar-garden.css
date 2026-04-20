@@ -1,0 +1,134 @@
+/* Sugar Garden card — rainbow animated border + garden illustration */
+
+.project-sg {
+  display: block;
+  padding: 5px;
+  border-radius: 22px;
+  background: linear-gradient(
+    90deg,
+    #ff5c6c, #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c,
+    #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c
+  );
+  background-size: 400% 100%;
+  animation: sg-rainbow-slide 10s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 210, 74, 0.28), 0 4px 18px rgba(0, 0, 0, 0.07);
+  border: none;
+  text-decoration: none;
+  color: #23331f;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 24px;
+}
+.project-sg:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 32px rgba(255, 210, 74, 0.45), 0 10px 28px rgba(0, 0, 0, 0.12);
+  border-color: transparent;
+  border-bottom-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-sg { box-shadow: 0 0 24px rgba(255, 210, 74, 0.35), 0 6px 20px rgba(0, 0, 0, 0.4); }
+}
+
+.sg-card-body {
+  background: linear-gradient(135deg, #dcecc1 0%, #bcd99a 55%, #d9b88a 100%);
+  border-radius: 18px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+@media (prefers-color-scheme: dark) {
+  .sg-card-body { background: linear-gradient(135deg, #3e5330 0%, #57733f 60%, #6a5632 100%); }
+  .project-sg .project-blurb { color: #e8efd9; }
+  .sg-tag {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+    color: #e8efd9 !important;
+  }
+}
+
+.sg-card-garden {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  align-items: flex-end;
+  justify-content: center;
+  width: 128px;
+}
+/* Explicit widths keep all three flowers within the 128px visual column */
+.sg-card-flower.sg-f1 { width: 38px; height: 53px; }
+.sg-card-flower.sg-f2 { width: 40px; height: 56px; }
+.sg-card-flower.sg-f3 { width: 44px; height: 62px; }
+.sg-card-flower {
+  transform-origin: 50% 100%;
+  animation: sg-sway 6.5s ease-in-out infinite;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.18));
+}
+.sg-card-flower.sg-f2 { animation-delay: -2s; }
+.sg-card-flower.sg-f3 {
+  animation-delay: -4s;
+  filter: drop-shadow(0 0 8px rgba(255,210,74,0.6)) drop-shadow(0 3px 3px rgba(0,0,0,0.2));
+}
+.project-sg:hover .sg-card-flower {
+  animation: sg-gust 2.6s ease-in-out infinite;
+}
+
+.sg-card-text { flex: 1; min-width: 0; }
+
+.project-sg .project-title .zh {
+  font-family: "ZCOOL KuaiLe", "Noto Sans SC", system-ui;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #23331f;
+}
+.project-sg .project-title .en {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #23331f;
+  letter-spacing: -0.01em;
+}
+@media (prefers-color-scheme: dark) {
+  .project-sg .project-title .zh,
+  .project-sg .project-title .en { color: #f3f8ee; }
+}
+
+.project-sg .project-blurb {
+  color: #3b4f32;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.sg-tag {
+  border: 1px solid rgba(35, 51, 31, 0.3) !important;
+  background: rgba(255, 255, 255, 0.4);
+  color: #23331f !important;
+  font-size: 0.72rem;
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+@keyframes sg-rainbow-slide {
+  from { background-position: 0% 50%; }
+  to   { background-position: 400% 50%; }
+}
+@keyframes sg-sway {
+  0%,100% { transform: rotate(-2deg); }
+  50%     { transform: rotate(2deg); }
+}
+@keyframes sg-gust {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-7deg); }
+  45%  { transform: rotate(5deg); }
+  65%  { transform: rotate(-3deg); }
+  85%  { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 480px) {
+  .sg-card-body { flex-direction: column; align-items: stretch; gap: 14px; }
+  .sg-card-garden { align-self: center; }
+}

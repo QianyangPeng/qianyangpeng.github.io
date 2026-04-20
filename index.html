@@ -6,471 +6,45 @@
 <title>Qianyang Peng</title>
 <meta name="description" content="Qianyang Peng — software engineer at Google. Personal site and projects." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='56' font-family='system-ui'%3EQ%3C/text%3E%3C/svg%3E" />
-<style>
-  :root {
-    --bg: #fafaf7;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --accent: #c0392b;
-    --card: #ffffff;
-    --border: #e7e5df;
-    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111111;
-      --fg: #ececec;
-      --muted: #9a9a9a;
-      --accent: #ff7a6b;
-      --card: #1a1a1a;
-      --border: #2a2a2a;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.25);
+
+<!-- Inline lang detection: runs before stylesheets to prevent flash of wrong language.
+     Order: stored choice > navigator.language (zh-*) > English default. -->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('qp-lang');
+      var lang = stored || (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
+      if (lang !== 'en' && lang !== 'zh') lang = 'en';
+      document.documentElement.lang = lang;
+    } catch (e) {
+      document.documentElement.lang = 'en';
     }
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  main {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 96px 24px 120px;
-  }
-  @media (max-width: 560px) {
-    main { padding: 56px 20px 80px; }
-    body { font-size: 16px; }
-  }
-  .name {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin: 0 0 6px;
-  }
-  .name-zh {
-    color: var(--muted);
-    font-weight: 400;
-    margin-left: 10px;
-    font-size: 1.4rem;
-  }
-  .tagline {
-    color: var(--muted);
-    margin: 0 0 40px;
-    font-size: 1rem;
-  }
-  .tagline a { color: inherit; }
-  .tagline a:hover { color: var(--fg); }
-  section { margin-top: 48px; }
-  h2 {
-    font-size: 0.78rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    margin: 0 0 16px;
-  }
-  p { margin: 0 0 14px; }
-  a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
-  }
-  a:hover { border-bottom-color: var(--accent); }
+  })();
+</script>
 
-  .project {
-    display: block;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 22px;
-    box-shadow: var(--shadow);
-    color: inherit;
-    border-bottom: 1px solid var(--border);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-  }
-  .project:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.06);
-    border-color: var(--accent);
-  }
-  @media (prefers-color-scheme: dark) {
-    .project:hover {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.3);
-    }
-  }
-  .project-title {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 6px;
-  }
-  .project-title .zh {
-    font-size: 1.05rem;
-    font-weight: 600;
-  }
-  .project-title .en {
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 400;
-  }
-  .project-blurb {
-    color: var(--fg);
-    font-size: 0.95rem;
-    margin: 0 0 10px;
-  }
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-  .project-tags span {
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 2px 10px;
-  }
-
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 4px;
-  }
-  .links a {
-    color: var(--fg);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2px;
-  }
-  .links a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-
-  /* ----- Sugar Garden card (custom style — breaks the portfolio default on purpose) ----- */
-  .project-sg {
-    display: block;
-    padding: 5px;
-    border-radius: 22px;
-    background: linear-gradient(
-      90deg,
-      #ff5c6c, #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c,
-      #ffb085, #ffd24a, #7ad9b5, #7ec4ff, #b892ff, #ff5c6c
-    );
-    background-size: 400% 100%;
-    animation: sg-rainbow-slide 10s linear infinite;
-    box-shadow: 0 0 20px rgba(255, 210, 74, 0.28), 0 4px 18px rgba(0, 0, 0, 0.07);
-    border: none;
-    text-decoration: none;
-    color: #23331f;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 24px;
-  }
-  .project-sg:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 32px rgba(255, 210, 74, 0.45), 0 10px 28px rgba(0, 0, 0, 0.12);
-    border-color: transparent;
-  }
-  .project-sg:hover { border-bottom-color: transparent; }   /* override base a:hover rule */
-  .sg-card-body {
-    background: linear-gradient(135deg, #dcecc1 0%, #bcd99a 55%, #d9b88a 100%);
-    border-radius: 18px;
-    padding: 20px 22px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    min-height: 140px;
-    position: relative;
-    overflow: hidden;
-  }
-  @media (prefers-color-scheme: dark) {
-    .project-sg { box-shadow: 0 0 24px rgba(255, 210, 74, 0.35), 0 6px 20px rgba(0, 0, 0, 0.4); }
-    .sg-card-body { background: linear-gradient(135deg, #3e5330 0%, #57733f 60%, #6a5632 100%); }
-    .project-sg .project-blurb { color: #e8efd9; }
-    .project-sg .project-title .en { color: #a8b896; }
-    .sg-tag { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: #e8efd9 !important; }
-  }
-
-  .sg-card-garden {
-    display: flex;
-    gap: 2px;
-    flex-shrink: 0;
-    align-items: flex-end;
-    justify-content: center;
-    width: 128px;
-  }
-  /* Explicit widths keep all three flowers within the 128px visual column */
-  .sg-card-flower.sg-f1 { width: 38px; height: 53px; }
-  .sg-card-flower.sg-f2 { width: 40px; height: 56px; }
-  .sg-card-flower.sg-f3 { width: 44px; height: 62px; }
-  .sg-card-flower {
-    transform-origin: 50% 100%;
-    animation: sg-sway 6.5s ease-in-out infinite;
-    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.18));
-  }
-  .sg-card-flower.sg-f2 { animation-delay: -2s; }
-  .sg-card-flower.sg-f3 { animation-delay: -4s; filter: drop-shadow(0 0 8px rgba(255,210,74,0.6)) drop-shadow(0 3px 3px rgba(0,0,0,0.2)); }
-  .project-sg:hover .sg-card-flower {
-    animation: sg-gust 2.6s ease-in-out infinite;
-  }
-
-  .sg-card-text { flex: 1; min-width: 0; }
-  .project-sg .project-title .zh {
-    font-family: "ZCOOL KuaiLe", "Noto Sans SC", system-ui;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #23331f;
-  }
-  @media (prefers-color-scheme: dark) {
-    .project-sg .project-title .zh { color: #f3f8ee; }
-  }
-  .project-sg .project-blurb {
-    color: #3b4f32;
-    font-size: 0.92rem;
-    line-height: 1.55;
-  }
-  .sg-tag {
-    border: 1px solid rgba(35, 51, 31, 0.3) !important;
-    background: rgba(255, 255, 255, 0.4);
-    color: #23331f !important;
-    font-size: 0.72rem;
-    border-radius: 999px;
-    padding: 2px 10px;
-  }
-
-  @keyframes sg-rainbow-slide {
-    from { background-position: 0% 50%; }
-    to   { background-position: 400% 50%; }
-  }
-  @keyframes sg-sway {
-    0%,100% { transform: rotate(-2deg); }
-    50%     { transform: rotate(2deg); }
-  }
-  @keyframes sg-gust {
-    0%   { transform: rotate(0deg); }
-    20%  { transform: rotate(-7deg); }
-    45%  { transform: rotate(5deg); }
-    65%  { transform: rotate(-3deg); }
-    85%  { transform: rotate(1deg); }
-    100% { transform: rotate(0deg); }
-  }
-
-  @media (max-width: 480px) {
-    .sg-card-body { flex-direction: column; align-items: stretch; gap: 14px; }
-    .sg-card-garden { align-self: center; }
-  }
-
-  /* ----- Chinese Rhymes card (custom style — mirrors the site's signature pinyin-over-char rhyme chip) ----- */
-  .project-rhyme {
-    display: block;
-    padding: 3px;
-    border-radius: 18px;
-    background: linear-gradient(
-      90deg,
-      #7ec4ff, #34d399, #fbbf24, #b89464, #7ec4ff,
-      #34d399, #fbbf24, #b89464, #7ec4ff
-    );
-    background-size: 300% 100%;
-    animation: rhyme-border-slide 14s linear infinite;
-    box-shadow: 0 0 16px rgba(52, 211, 153, 0.18), 0 4px 18px rgba(0, 0, 0, 0.07);
-    border: none;
-    text-decoration: none;
-    color: #1a1a1a;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 24px;
-  }
-  .project-rhyme:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 28px rgba(52, 211, 153, 0.35), 0 10px 28px rgba(0, 0, 0, 0.12);
-    border-color: transparent;
-  }
-  .project-rhyme:hover { border-bottom-color: transparent; }
-  @media (prefers-color-scheme: dark) {
-    .project-rhyme {
-      box-shadow: 0 0 22px rgba(52, 211, 153, 0.3), 0 6px 20px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  .rhyme-card-body {
-    background: linear-gradient(135deg, #fbfaef 0%, #f4ede0 60%, #e9dec8 100%);
-    border-radius: 15px;
-    padding: 20px 22px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    min-height: 150px;
-    position: relative;
-    overflow: hidden;
-  }
-  .rhyme-card-body::before {
-    /* Giant 韵 watermark in vermillion — evokes the 印章 stamp aesthetic */
-    content: "韵";
-    position: absolute;
-    right: -30px;
-    bottom: -50px;
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-    font-size: 240px;
-    color: rgba(180, 50, 48, 0.06);
-    font-weight: bold;
-    pointer-events: none;
-    line-height: 1;
-    user-select: none;
-  }
-  @media (prefers-color-scheme: dark) {
-    .rhyme-card-body {
-      background: linear-gradient(135deg, #1a2321 0%, #202b28 60%, #261f1c 100%);
-    }
-    .rhyme-card-body::before { color: rgba(255, 122, 107, 0.1); }
-  }
-
-  .rhyme-card-cluster {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    width: 128px;
-    align-items: center;
-  }
-  .rhyme-line { display: flex; gap: 2px; justify-content: center; }
-
-  .rhyme-char {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 22px;
-    padding: 3px 4px 2px;
-    border-radius: 5px;
-    transition: background 0.25s ease;
-  }
-  .rhyme-char.rhyme-hit { background: rgba(16, 150, 85, 0.16); }
-  @media (prefers-color-scheme: dark) {
-    .rhyme-char.rhyme-hit { background: rgba(52, 211, 153, 0.2); }
-  }
-
-  .rhyme-py {
-    font-family: ui-monospace, "SF Mono", "DejaVu Sans Mono", monospace;
-    font-size: 0.62rem;
-    color: #a8a090;
-    line-height: 1;
-    margin-bottom: 3px;
-    font-weight: 400;
-  }
-  .rhyme-char.rhyme-hit .rhyme-py {
-    color: #0c6544;
-    font-weight: 600;
-  }
-  @media (prefers-color-scheme: dark) {
-    .rhyme-py { color: #9a9081; }
-    .rhyme-char.rhyme-hit .rhyme-py { color: #6ee7b7; }
-  }
-
-  .rhyme-cn {
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: #2a2a2a;
-    line-height: 1;
-  }
-  .rhyme-char.rhyme-hit .rhyme-cn {
-    color: #0c6544;
-    font-weight: 700;
-  }
-  @media (prefers-color-scheme: dark) {
-    .rhyme-cn { color: #ece4d2; }
-    .rhyme-char.rhyme-hit .rhyme-cn { color: #6ee7b7; }
-  }
-
-  .rhyme-card-text {
-    flex: 1;
-    min-width: 0;
-    position: relative;
-    z-index: 1;
-  }
-  .project-rhyme .project-title .zh {
-    font-family: "Noto Serif SC", "Songti SC", serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    letter-spacing: 0.04em;
-  }
-  .project-rhyme .project-title .en {
-    font-family: "Noto Serif", "Georgia", serif;
-    font-style: italic;
-    font-size: 0.82rem;
-    color: #6b6157;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-  }
-  @media (prefers-color-scheme: dark) {
-    .project-rhyme .project-title .zh { color: #f5efdc; }
-    .project-rhyme .project-title .en { color: #a8a090; }
-  }
-  .project-rhyme .project-blurb {
-    color: #3d362d;
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-  @media (prefers-color-scheme: dark) {
-    .project-rhyme .project-blurb { color: #d4cebd; }
-  }
-
-  .rhyme-tag {
-    border: 1px solid rgba(180, 140, 80, 0.3) !important;
-    background: rgba(255, 255, 255, 0.5);
-    color: #5a4a30 !important;
-    font-size: 0.72rem;
-    border-radius: 999px;
-    padding: 2px 10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    .rhyme-tag {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.18) !important;
-      color: #d4cebd !important;
-    }
-  }
-
-  @keyframes rhyme-border-slide {
-    from { background-position: 0% 50%; }
-    to   { background-position: 300% 50%; }
-  }
-  /* On hover: each line's highlighted chars bounce in sequence —
-     like three phrases "chiming" in on the same rhyme */
-  .project-rhyme:hover .rhyme-line:nth-child(1) .rhyme-char.rhyme-hit {
-    animation: rhyme-chime 1.8s ease-in-out 0s infinite;
-  }
-  .project-rhyme:hover .rhyme-line:nth-child(2) .rhyme-char.rhyme-hit {
-    animation: rhyme-chime 1.8s ease-in-out 0.2s infinite;
-  }
-  .project-rhyme:hover .rhyme-line:nth-child(3) .rhyme-char.rhyme-hit {
-    animation: rhyme-chime 1.8s ease-in-out 0.4s infinite;
-  }
-  @keyframes rhyme-chime {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-3px); }
-  }
-
-  @media (max-width: 480px) {
-    .rhyme-card-body { flex-direction: column; align-items: stretch; gap: 14px; padding: 16px 14px; }
-    .rhyme-card-cluster { align-self: center; }
-    .rhyme-cn { font-size: 1.15rem; }
-    .rhyme-char { min-width: 22px; }
-  }
-</style>
+<link rel="stylesheet" href="styles/base.css" />
+<link rel="stylesheet" href="styles/projects/sugar-garden.css" />
+<link rel="stylesheet" href="styles/projects/chinese-rhymes.css" />
+<script defer src="scripts/i18n.js"></script>
 </head>
 <body>
+
+<button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language"></button>
+
 <main>
   <h1 class="name">Qianyang Peng<span class="name-zh">彭乾旸</span></h1>
-  <p class="tagline">Software engineer at Google · Seattle</p>
-  <section>
-    <h2>Projects</h2>
+  <p class="tagline">
+    <span lang="en">Software engineer at Google · Seattle</span>
+    <span lang="zh">Google 软件工程师 · 西雅图</span>
+  </p>
 
+  <section>
+    <h2>
+      <span lang="en">Projects</span>
+      <span lang="zh">项目</span>
+    </h2>
+
+    <!-- ───────── Sugar Garden ───────── -->
     <a class="project-sg" href="https://qianyangpeng.github.io/sugar-garden/">
       <div class="sg-card-body">
         <div class="sg-card-garden" aria-hidden="true">
@@ -565,10 +139,13 @@
 
         <div class="sg-card-text">
           <div class="project-title">
-            <span class="zh">糖糖花园</span>
-            <span class="en">Sugar Garden</span>
+            <span class="zh" lang="zh">糖糖花园</span>
+            <span class="en" lang="en">Sugar Garden</span>
           </div>
-          <p class="project-blurb">一家人共用的儿童糖分追踪 PWA。抽卡机制收集 35 种花，糖吃得越健康，明天抽到稀有花的概率越高。</p>
+          <p class="project-blurb">
+            <span lang="en">A family-shared PWA for tracking a kid's daily sugar intake. A gacha mechanic collects 35 flowers — the healthier the day, the higher tomorrow's rare-pull rate.</span>
+            <span lang="zh">一家人共用的儿童糖分追踪 PWA。抽卡机制收集 35 种花，糖吃得越健康，明天抽到稀有花的概率越高。</span>
+          </p>
           <div class="project-tags">
             <span class="sg-tag">React</span><span class="sg-tag">Cloudflare Workers</span><span class="sg-tag">D1</span><span class="sg-tag">PWA</span><span class="sg-tag">SVG</span>
           </div>
@@ -576,6 +153,7 @@
       </div>
     </a>
 
+    <!-- ───────── Chinese Rhymes ───────── -->
     <a class="project-rhyme" href="https://qianyangpeng.github.io/chinese-rhyme-finder/">
       <div class="rhyme-card-body">
         <div class="rhyme-card-cluster" aria-hidden="true">
@@ -603,10 +181,13 @@
 
         <div class="rhyme-card-text">
           <div class="project-title">
-            <span class="zh">押韵集</span>
-            <span class="en">Chinese Rhymes</span>
+            <span class="zh" lang="zh">押韵集</span>
+            <span class="en" lang="en">Chinese Rhymes</span>
           </div>
-          <p class="project-blurb">中文多音节押韵词典。80 万条短语、10 个开源语料库，算法挖掘双押到八押，给写歌词、说唱、诗词的人用。</p>
+          <p class="project-blurb">
+            <span lang="en">A Chinese multi-syllable rhyme dictionary. 800K phrases across 10 open-source corpora, algorithmically mined for 2- to 8-syllable rhymes — built for lyricists, rappers, and poets.</span>
+            <span lang="zh">中文多音节押韵词典。80 万条短语、10 个开源语料库，算法挖掘双押到八押，给写歌词、说唱、诗词的人用。</span>
+          </p>
           <div class="project-tags">
             <span class="rhyme-tag">TypeScript</span><span class="rhyme-tag">SvelteKit</span><span class="rhyme-tag">Tailwind</span><span class="rhyme-tag">GitHub Pages</span>
           </div>
@@ -616,7 +197,10 @@
   </section>
 
   <section>
-    <h2>Elsewhere</h2>
+    <h2>
+      <span lang="en">Elsewhere</span>
+      <span lang="zh">别处</span>
+    </h2>
     <div class="links">
       <a href="https://www.linkedin.com/in/qianyangpeng/">LinkedIn</a>
       <a href="https://github.com/QianyangPeng">GitHub</a>
