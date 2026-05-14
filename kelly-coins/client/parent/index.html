@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kelly Coins 家长端</title>
+
+  <!-- PWA: separate app identity from the child PWA. iOS treats this as its
+       own installable app with its own icon, permissions, and push. -->
+  <link rel="manifest" href="/parent/manifest.json">
+  <meta name="theme-color" content="#8E3E5C">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="家长">
+  <link rel="icon" type="image/png" sizes="32x32" href="/parent/assets/favicon-32.png">
+  <link rel="icon" type="image/x-icon" href="/parent/assets/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/parent/assets/icon-180.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/parent/assets/icon-192.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/parent/css/styles.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <main id="app-content"></main>
+  <nav id="app-nav"></nav>
+  <div id="toast-container"></div>
+  <div id="modal-container"></div>
+  <script type="module" src="/parent/js/app.js"></script>
+  <script>
+    // Register the parent service worker. Separate scope from /child/
+    // so the two PWAs are fully independent.
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/parent/sw.js', { scope: '/parent/' })
+          .catch((err) => console.warn('Parent SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

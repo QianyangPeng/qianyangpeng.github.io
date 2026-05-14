@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA: web app manifest -->
+  <link rel="manifest" href="/child/manifest.json">
+  <meta name="theme-color" content="#FFD700">
+
+  <!-- iOS PWA: full-screen, dark status bar, home-screen icon -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kelly Coins">
+  <link rel="apple-touch-icon" href="/child/assets/characters/styles/gacha/default.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/child/assets/characters/styles/gacha/default.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/child/assets/characters/styles/gacha/default.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/child/assets/characters/styles/gacha/default.png">
+  <link rel="icon" type="image/png" href="/child/assets/characters/styles/gacha/default.png">
+
+  <title>Kelly的小世界</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Display font for English titles + numbers (round, friendly, storybook) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- Chinese display font: warm hand-written calligraphy feel matching watercolor storybook -->
+  <link href="https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkaiscreen/dist/LXGWWenKaiScreen/result.css" rel="stylesheet">
+  <!-- Fallback: Noto Sans SC for missing glyphs -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/child/css/styles.css">
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/child/js/app.js"></script>
+  <script>
+    // Register service worker for offline support and home-screen install.
+    // Scoped to / so it can intercept root navigations as well as /child/*.
+    // On load we also proactively unregister any old-version SWs and clear
+    // their caches — this protects against wedged workers that keep serving
+    // stale modules after a big refactor (the kind that would otherwise need
+    // a hard reload to recover from).
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(r => r.unregister()));
+          const keys = await caches.keys();
+          await Promise.all(keys.map(k => caches.delete(k)));
+          await navigator.serviceWorker.register('/child/sw.js?v=2', { scope: '/' });
+        } catch (err) { console.warn('SW setup failed:', err); }
+      });
+    }
+  </script>
+</body>
+</html>

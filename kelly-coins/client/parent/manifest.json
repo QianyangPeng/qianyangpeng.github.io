@@ -1,0 +1,26 @@
+{
+  "id": "/parent/",
+  "name": "Kelly Coins 家长端",
+  "short_name": "家长",
+  "description": "批准孩子的购买和兑换请求",
+  "start_url": "/parent/",
+  "scope": "/parent/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#8E3E5C",
+  "background_color": "#FFF7EC",
+  "icons": [
+    {
+      "src": "/parent/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/parent/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
