@@ -10,7 +10,9 @@ Static GitHub Pages gallery for Model Y Juniper Premium digital wrap designs.
 
 Open `/itasha/` on a web server. Opening `index.html` as a `file://` URL will not work because the viewer loads ES modules and a GLB.
 
-The site's 3D vehicle is an artist-authored 2025 Juniper, not Tesla's proprietary dashboard mesh. The viewer reads the downloadable atlas directly and applies an adapted spatial projection. It shows real interactive 3D and actual downloaded artwork, but small seams and curvature can differ from the in-car visualization. It is not physical vinyl production geometry.
+The site's 3D vehicle is an artist-authored 2025 Juniper, not Tesla's proprietary dashboard mesh. Its original UVs are empty. The viewer maps its 20 independent exterior panels individually; lower trim and interior pieces remain dark. Decorative panels read the downloadable atlas. Portrait-bearing doors use the exact source crop recorded by the export manifest, before the official panel mask is applied, and share a uniform-scale planar projection across both doors. This avoids stretching faces to fit the different community model. The 3D view is an artistic placement preview; use the separate actual-atlas inspection tab for download geometry, and the vehicle for final placement. It is not physical vinyl production geometry.
+
+`assets/model/panel-mapping.json` identifies the two mapped meshes and their 20 shells; `panel-lookup.bin` and `surface-lookup.bin` contain contour coordinates. `preview-doors.webp` is a website-only texture assembled mechanically from each design's documented left/right source crops; it is not a Tesla import file. All 78 downloadable PNG files are unchanged by this mapping correction. USB downloads are grouped into ten archives of at most ten designs.
 
 `catalog.json` indexes ready designs. Each record points to its original PNG, a compressed concept image, an inspection image and a thumbnail. Add designs only after checking their source manifest. Original generation prompts and source images are retained in the separate full design collection.
 

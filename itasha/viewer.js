@@ -4,40 +4,27 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
-// Projection is adapted to the community Juniper mesh; it is not Tesla's factory UV rig.
-// Every decorative sample comes from the downloadable atlas, never the concept render.
+// Each connected shell maps to its own Tesla atlas island. Portrait-bearing doors
+// use the same exported source crops before masking, with a shared equal-scale
+// projection so a different community mesh cannot bend faces to its contours.
 const projection=/* glsl */`
 uniform sampler2D wrapAtlas;
-uniform sampler2D wrapMask;
-uniform vec3 wrapBase;
-varying vec3 vWrapP;
-varying vec3 vWrapN;
-vec2 atlasXY(vec2 pixel){return vec2(pixel.x/1024.0,1.0-pixel.y/1024.0);}
-vec2 wrapProjection(vec3 p,vec3 n){
- float side=step(0.0,p.x);
- float height=clamp((p.y-0.34)/0.84,0.015,0.985);
- float u=clamp((p.z+1.03)/2.25,0.012,0.988);
- if(p.z < -0.93 && p.y>0.79 && abs(p.x)<0.81 && n.y>0.48){
-  return atlasXY(vec2(375.0+clamp((p.x+0.83)/1.66,0.025,0.975)*271.0,110.0+clamp((p.z+2.27)/1.35,0.025,0.975)*230.0));
- }
- if(p.z < -2.09 && abs(n.z)>abs(n.x)*0.75){
-  return atlasXY(vec2(244.0+clamp((p.x+1.0)/2.0,0.02,0.98)*534.0,8.0+clamp(1.0-p.y/1.03,0.04,0.94)*110.0));
- }
- if(p.z > 2.04 && abs(n.z)>abs(n.x)*0.75){
-  return atlasXY(vec2(395.0+clamp((1.0-p.x)/2.0,0.03,0.97)*236.0,938.0+clamp((1.15-p.y)/0.8,0.03,0.97)*77.0));
- }
- if(p.y>1.21){
-  return atlasXY(vec2(mix(341.0,631.0,side)+24.0,346.0+clamp((p.z+1.1)/3.0,0.02,0.98)*466.0));
- }
- if(p.z < -1.03){
-  float f=clamp((p.z+2.18)/1.15,0.03,0.97);
-  return side<0.5?atlasXY(vec2(110.0+height*222.0,114.0+f*254.0)):atlasXY(vec2(693.0+(1.0-height)*220.0,113.0+f*256.0));
- }
- if(p.z > 1.22){
-  float r=clamp((p.z-1.22)/1.1,0.03,0.97);
-  return side<0.5?atlasXY(vec2(123.0+height*142.0,779.0+r*172.0)):atlasXY(vec2(756.0+(1.0-height)*143.0,782.0+r*172.0));
- }
- return side<0.5?atlasXY(vec2(68.0+height*192.0,347.0+u*446.0)):atlasXY(vec2(761.0+(1.0-height)*190.0,349.0+u*447.0));
+uniform sampler2D panelLookup;
+uniform sampler2D surfaceLookup;
+uniform sampler2D doorArtwork;
+varying vec3 vPanelCoord;
+varying vec3 vBodyPosition;
+vec2 wrapProjection(vec3 p){
+ float along=clamp(p.x,0.0,1.0)*1023.0;
+ float row=(floor(p.z+0.5)+0.5)/32.0;
+ float index=floor(along);
+ vec4 first=texture2D(panelLookup,vec2((index+0.5)/1024.0,row));
+ vec4 second=texture2D(panelLookup,vec2((min(index+1.0,1023.0)+0.5)/1024.0,row));
+ vec4 bounds=mix(first,second,fract(along));
+ vec2 surface=mix(texture2D(surfaceLookup,vec2((index+0.5)/1024.0,row)).rg,texture2D(surfaceLookup,vec2((min(index+1.0,1023.0)+0.5)/1024.0,row)).rg,fract(along));
+ float across=clamp((p.y-surface.x)/max(surface.y-surface.x,0.0001),0.0,1.0);
+ vec2 atlas=mix(bounds.xy,bounds.zw,across);
+ return vec2(atlas.x,1.0-atlas.y);
 }`;
 
 export class WrapViewer{
@@ -70,20 +57,34 @@ export class WrapViewer{
  }
  async load(){
   const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-  const [gltf,mask]=await Promise.all([loader.loadAsync('./assets/model/juniper.glb'),new THREE.TextureLoader().loadAsync('./assets/model/template.png')]);
-  this.mask=mask;mask.colorSpace=THREE.NoColorSpace;mask.flipY=true;
+  const [gltf,mapping,lookup,surface]=await Promise.all([loader.loadAsync('./assets/model/juniper.glb'),fetch('./assets/model/panel-mapping.json?v=2').then(r=>{if(!r.ok)throw Error('Panel mapping unavailable');return r.json();}),fetch('./assets/model/panel-lookup.bin?v=2').then(r=>{if(!r.ok)throw Error('Panel lookup unavailable');return r.arrayBuffer();}),fetch('./assets/model/surface-lookup.bin?v=2').then(r=>{if(!r.ok)throw Error('Surface lookup unavailable');return r.arrayBuffer();})]);
+  this.panelLookup=new THREE.DataTexture(new Float32Array(lookup),mapping.lookupWidth,mapping.lookupHeight,THREE.RGBAFormat,THREE.FloatType);this.panelLookup.needsUpdate=true;this.panelLookup.minFilter=THREE.NearestFilter;this.panelLookup.magFilter=THREE.NearestFilter;this.mappingVersion=mapping.version;this.mappedPanels=mapping.panels.length;
+  this.surfaceLookup=new THREE.DataTexture(new Float32Array(surface),mapping.lookupWidth,mapping.lookupHeight,THREE.RGBAFormat,THREE.FloatType);this.surfaceLookup.needsUpdate=true;this.surfaceLookup.minFilter=THREE.NearestFilter;this.surfaceLookup.magFilter=THREE.NearestFilter;
   this.car=gltf.scene;this.car.updateMatrixWorld(true);const meshes=[];this.car.traverse(o=>{if(o.isMesh)meshes.push(o);});
   const tireCenters=meshes.filter(m=>m.material.name==='tire_rubber').map(m=>new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3()));
   for(const center of tireCenters){const group=new THREE.Group();group.name='wheel_'+this.wheels.length;group.position.copy(center);this.car.add(group);this.wheels.push(group);}
   const dummy=new THREE.DataTexture(new Uint8Array([220,216,204,255]),1,1);dummy.needsUpdate=true;dummy.colorSpace=THREE.SRGBColorSpace;
-  this.uniforms={wrapAtlas:{value:dummy},wrapMask:{value:mask},wrapBase:{value:new THREE.Color('#e0dacf')}};
+  this.uniforms={wrapAtlas:{value:dummy},panelLookup:{value:this.panelLookup},surfaceLookup:{value:this.surfaceLookup}};
+  this.uniforms.doorArtwork={value:dummy};
   for(const mesh of meshes){
    mesh.castShadow=true;mesh.receiveShadow=true;const role=mesh.material.name;const original=mesh.material;
-   if(role==='exterior_paint'){
+   const meshIndex=gltf.parser.associations.get(mesh)?.meshes,coordinates=mapping.geometries.find(g=>g.mesh===meshIndex);
+   if(role==='exterior_paint'&&coordinates){
+    if(mesh.geometry.attributes.position.count!==coordinates.count)throw Error('Model and panel map differ');
+    const bytes=Uint8Array.from(atob(coordinates.coordinates),c=>c.charCodeAt(0));mesh.geometry.setAttribute('panelCoord',new THREE.BufferAttribute(new Float32Array(bytes.buffer),3));
     const material=new THREE.MeshPhysicalMaterial({color:'#ffffff',metalness:.04,roughness:.48,clearcoat:.25,clearcoatRoughness:.3,envMapIntensity:.55,side:THREE.DoubleSide});
-    material.onBeforeCompile=shader=>{Object.assign(shader.uniforms,this.uniforms);shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vWrapP;\nvarying vec3 vWrapN;').replace('#include <begin_vertex>','#include <begin_vertex>\nvWrapP=position;vWrapN=normal;');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\n'+projection).replace('#include <map_fragment>',`vec2 atlasUV=wrapProjection(vWrapP,normalize(vWrapN));vec4 ink=texture2D(wrapAtlas,atlasUV);float painted=smoothstep(0.02,0.13,texture2D(wrapMask,atlasUV).r);diffuseColor.rgb=mix(wrapBase,ink.rgb,painted);`);};material.customProgramCacheKey=()=> 'juniper-atlas-projection-v1';mesh.material=material;this.paintMaterials.push(material);
+    material.onBeforeCompile=shader=>{Object.assign(shader.uniforms,this.uniforms);shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute vec3 panelCoord;\nvarying vec3 vPanelCoord;\nvarying vec3 vBodyPosition;').replace('#include <begin_vertex>','#include <begin_vertex>\nvPanelCoord=panelCoord;vBodyPosition=position;');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\n'+projection).replace('#include <map_fragment>',`float panel=floor(vPanelCoord.z+0.5);
+     if(panel>=3.0&&panel<=6.0){
+      float rightSide=mod(panel,2.0)<0.5?1.0:0.0;
+      float horizontal=(vBodyPosition.z+1.005)/2.32;
+      float physicalHeight=mix(2.32*192.0/446.0,2.32*190.0/447.0,rightSide);
+      float vertical=clamp((0.69+physicalHeight*0.5-vBodyPosition.y)/physicalHeight,0.001,0.999);
+      vec2 doorUV=vec2(mix(horizontal,1.0-horizontal,rightSide),1.0-(rightSide+vertical)*0.5);
+      diffuseColor.rgb=texture2D(doorArtwork,doorUV).rgb;
+     }else{vec2 atlasUV=wrapProjection(vPanelCoord);diffuseColor.rgb=texture2D(wrapAtlas,atlasUV).rgb;}`);};material.customProgramCacheKey=()=> 'juniper-independent-panels-v3';mesh.material=material;this.paintMaterials.push(material);
    }else{
     mesh.material=original.clone();const m=mesh.material;
+    if(role==='exterior_paint'){m.color.set('#20252a');m.metalness=.04;m.roughness=.66;}
     if(role==='glass'){m.color.set('#172632');m.transparent=true;m.opacity=.69;m.depthWrite=false;m.metalness=.15;m.roughness=.16;}
     if(role==='wheel_finish'){m.color.set('#373b3e');m.metalness=.72;m.roughness=.28;}
     if(role==='tire_rubber'){m.color.set('#202326');m.roughness=.93;}
@@ -95,14 +96,14 @@ export class WrapViewer{
   this.scene.add(this.car);this.modelLoaded=true;this.setLighting('studio');this.resize();return this;
  }
  async setDesign(design){
-  if(this.currentId===design.id)return;const token=++this.designToken;const texture=await new THREE.TextureLoader().loadAsync(design.wrap);if(token!==this.designToken){texture.dispose();return;}texture.colorSpace=THREE.SRGBColorSpace;texture.flipY=true;texture.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());this.uniforms.wrapAtlas.value=texture;this.uniforms.wrapBase.value.set(design.base||'#c3b89e');this.texture?.dispose();this.texture=texture;this.currentId=design.id;this.resetCamera();
+  if(this.currentId===design.id)return;const token=++this.designToken;const [texture,doors]=await Promise.all([new THREE.TextureLoader().loadAsync(design.wrap),new THREE.TextureLoader().loadAsync(design.previewDoors)]);if(token!==this.designToken){texture.dispose();doors.dispose();return;}for(const map of [texture,doors]){map.colorSpace=THREE.SRGBColorSpace;map.flipY=true;map.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());}this.uniforms.wrapAtlas.value=texture;this.uniforms.doorArtwork.value=doors;this.texture?.dispose();this.doorTexture?.dispose();this.texture=texture;this.doorTexture=doors;this.currentId=design.id;this.resetCamera();
  }
  setActive(active){this.active=active;this.lastFrame=0;}
  setMode(mode){this.mode=mode;this.controls.autoRotate=mode==='orbit';this.road.visible=mode==='drive';this.setLighting(this.lighting||'studio');if(this.car){this.car.position.y=0;this.car.rotation.z=0;}this.controls.update();}
  setSpeed(speed){this.speed=speed;}
  setLighting(name){this.lighting=name;const settings={studio:{bg:'#eae5dd',key:'#fff6e9',fill:'#d8e4ef',exposure:.95,keyPower:2.3,hemi:1.2,rim:1.1,env:.65},sunset:{bg:'#d9b8a2',key:'#ffcf97',fill:'#b9c4eb',exposure:.88,keyPower:2.6,hemi:.8,rim:.9,env:.5},night:{bg:'#202736',key:'#abc4ff',fill:'#dfbddc',exposure:.9,keyPower:1.6,hemi:.35,rim:.7,env:.2}}[name];this.scene.background.set(settings.bg);this.scene.fog.color.set(settings.bg);this.scene.environmentIntensity=settings.env;this.key.color.set(settings.key);this.key.intensity=settings.keyPower;this.rim.color.set(settings.fill);this.rim.intensity=settings.rim;this.hemi.intensity=settings.hemi;this.renderer.toneMappingExposure=settings.exposure;this.floor.material.color.set(this.mode==='drive'?(name==='night'?'#18251e':'#6e7c64'):name==='night'?'#252936':name==='sunset'?'#bcaa96':'#e4ddd2');this.lamps.forEach(m=>m.emissiveIntensity=name==='night'?2.2:.65);}
- resetCamera(){this.camera.position.set(-4.25,2.15,-4.85);this.controls.target.set(0,.77,0);this.controls.update();}
- resize(){const box=this.host.getBoundingClientRect();if(box.width<1||box.height<1)return;this.camera.aspect=box.width/box.height;this.camera.updateProjectionMatrix();this.renderer.setSize(box.width,box.height,false);}
+ resetCamera(){this.controls.target.set(0,.77,0);this.camera.position.set(-4.25,1.38,-4.85).multiplyScalar(this.fitScale||1).add(this.controls.target);this.controls.update();}
+ resize(){const box=this.host.getBoundingClientRect();if(box.width<1||box.height<1)return;const aspect=box.width/box.height,nextScale=Math.max(1,Math.min(1.8,1.35/aspect)),priorScale=this.fitScale||1;if(nextScale!==priorScale){this.camera.position.sub(this.controls.target).multiplyScalar(nextScale/priorScale).add(this.controls.target);this.fitScale=nextScale;}this.camera.aspect=aspect;this.camera.updateProjectionMatrix();this.renderer.setSize(box.width,box.height,false);}
  renderFrame(time){this.raf=requestAnimationFrame(this.renderFrame);if(!this.active)return;const dt=this.lastFrame?Math.min((time-this.lastFrame)/1000,.05):0;this.lastFrame=time;this.elapsed+=dt;if(this.mode==='drive'){const metersPerSecond=this.speed/3.6;for(const wheel of this.wheels)wheel.rotation.x-=metersPerSecond/.36*dt;for(const item of this.moving){item.mesh.position.z+=metersPerSecond*dt;if(item.mesh.position.z>65)item.mesh.position.z-=140;}if(this.car){this.car.position.y=Math.sin(this.elapsed*7)*.003;this.car.rotation.z=Math.sin(this.elapsed*1.6)*.002;}}this.controls.update(dt);this.renderer.render(this.scene,this.camera);}
- dispose(){cancelAnimationFrame(this.raf);this.observer.disconnect();this.controls.dispose();this.texture?.dispose();this.mask?.dispose();this.environment.dispose();this.renderer.dispose();}
+ dispose(){cancelAnimationFrame(this.raf);this.observer.disconnect();this.controls.dispose();this.texture?.dispose();this.doorTexture?.dispose();this.panelLookup?.dispose();this.surfaceLookup?.dispose();this.environment.dispose();this.renderer.dispose();}
 }
