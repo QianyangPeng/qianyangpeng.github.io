@@ -29,31 +29,19 @@ vec2 wrapProjection(vec3 p){
 
 export class WrapViewer{
  constructor(host){
-  this.host=host;this.active=false;this.mode='static';this.speed=55;this.elapsed=0;this.wheels=[];this.paintMaterials=[];this.lamps=[];this.texture=null;this.designToken=0;
+  this.host=host;this.active=false;this.wheels=[];this.paintMaterials=[];this.lamps=[];this.texture=null;this.designToken=0;
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#eae5dd');this.scene.fog=new THREE.Fog('#eae5dd',24,85);
   this.camera=new THREE.PerspectiveCamera(35,1,0.05,150);
   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.28;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   host.appendChild(this.renderer.domElement);this.renderer.domElement.setAttribute('aria-label','可拖动旋转的 Model Y Juniper 车衣三维预览');
-  this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enableDamping=true;this.controls.dampingFactor=.075;this.controls.enablePan=false;this.controls.minDistance=4;this.controls.maxDistance=13;this.controls.minPolarAngle=.18;this.controls.maxPolarAngle=Math.PI/2-.025;this.controls.autoRotateSpeed=.7;this.controls.target.set(0,.76,0);this.resetCamera();
+  this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enableDamping=true;this.controls.dampingFactor=.075;this.controls.enablePan=false;this.controls.minDistance=4;this.controls.maxDistance=13;this.controls.minPolarAngle=.18;this.controls.maxPolarAngle=Math.PI/2-.025;this.controls.target.set(0,.76,0);this.resetCamera();
   this.hemi=new THREE.HemisphereLight('#fff5e5','#776d68',2.4);this.scene.add(this.hemi);
   this.key=new THREE.DirectionalLight('#fff6e9',4.2);this.key.position.set(-4,7,-4);this.key.castShadow=true;this.key.shadow.mapSize.set(2048,2048);Object.assign(this.key.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:.1,far:25});this.key.shadow.bias=-.0002;this.key.shadow.normalBias=.02;this.scene.add(this.key);
   this.rim=new THREE.DirectionalLight('#d8e4ef',2.0);this.rim.position.set(4,4,3);this.scene.add(this.rim);
   const pmrem=new THREE.PMREMGenerator(this.renderer),room=new RoomEnvironment();this.environment=pmrem.fromScene(room,.035).texture;this.scene.environment=this.environment;room.dispose();pmrem.dispose();
   this.floor=new THREE.Mesh(new THREE.PlaneGeometry(180,180),new THREE.MeshStandardMaterial({color:'#e4ddd2',roughness:.96,metalness:0}));this.floor.rotation.x=-Math.PI/2;this.floor.position.y=-.016;this.floor.receiveShadow=true;this.scene.add(this.floor);
-  this.makeRoad();this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(host);this.resize();
+this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(host);this.resize();
   this.lastFrame=0;this.renderFrame=this.renderFrame.bind(this);this.raf=requestAnimationFrame(this.renderFrame);
- }
- makeRoad(){
-  this.road=new THREE.Group();this.road.visible=false;this.scene.add(this.road);
-  const surface=new THREE.Mesh(new THREE.PlaneGeometry(12,150),new THREE.MeshStandardMaterial({color:'#525552',roughness:.98}));surface.rotation.x=-Math.PI/2;surface.position.y=-.01;surface.receiveShadow=true;this.road.add(surface);
-  for(const x of [-5.5,5.5]){const edge=new THREE.Mesh(new THREE.PlaneGeometry(.12,150),new THREE.MeshBasicMaterial({color:'#b5b29f'}));edge.rotation.x=-Math.PI/2;edge.position.set(x,-.002,0);this.road.add(edge);}
-  this.moving=[];const stripeMaterial=new THREE.MeshBasicMaterial({color:'#e4dbc7'});
-  for(let i=0;i<28;i++){const stripe=new THREE.Mesh(new THREE.PlaneGeometry(.11,2.5),stripeMaterial);stripe.rotation.x=-Math.PI/2;stripe.position.set(2.3,.001,-70+i*5);this.road.add(stripe);this.moving.push({mesh:stripe,start:stripe.position.z});}
-  const poleMat=new THREE.MeshStandardMaterial({color:'#a5a495',roughness:.65}),trunkMat=new THREE.MeshStandardMaterial({color:'#635b51',roughness:1}),leafMat=new THREE.MeshStandardMaterial({color:'#738171',roughness:1});
-  for(let i=0;i<24;i++){
-   const side=i%2?1:-1,post=new THREE.Group();const stem=new THREE.Mesh(new THREE.BoxGeometry(.065,.7,.065),poleMat);stem.position.y=.35;post.add(stem);const cap=new THREE.Mesh(new THREE.BoxGeometry(.08,.13,.08),new THREE.MeshBasicMaterial({color:side>0?'#d2bf91':'#f0e6ce'}));cap.position.y=.57;post.add(cap);post.position.set(side*5.25,0,-70+Math.floor(i/2)*12);this.road.add(post);this.moving.push({mesh:post,start:post.position.z});
-   const tree=new THREE.Group(),trunk=new THREE.Mesh(new THREE.CylinderGeometry(.09,.15,1.5,7),trunkMat);trunk.position.y=.75;tree.add(trunk);const foliage=new THREE.Mesh(new THREE.ConeGeometry(1.1,3.8,7),leafMat);foliage.position.y=2.7;tree.add(foliage);tree.position.set(side*(8+(i%3)*1.8),0,-68+Math.floor(i/2)*12);tree.scale.setScalar(.8+(i%5)*.13);this.road.add(tree);this.moving.push({mesh:tree,start:tree.position.z});
-  }
  }
  async load(){
   const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
@@ -99,11 +87,10 @@ export class WrapViewer{
   if(this.currentId===design.id)return;const token=++this.designToken;const [texture,doors]=await Promise.all([new THREE.TextureLoader().loadAsync(design.wrap),new THREE.TextureLoader().loadAsync(design.previewDoors)]);if(token!==this.designToken){texture.dispose();doors.dispose();return;}for(const map of [texture,doors]){map.colorSpace=THREE.SRGBColorSpace;map.flipY=true;map.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());}this.uniforms.wrapAtlas.value=texture;this.uniforms.doorArtwork.value=doors;this.texture?.dispose();this.doorTexture?.dispose();this.texture=texture;this.doorTexture=doors;this.currentId=design.id;this.resetCamera();
  }
  setActive(active){this.active=active;this.lastFrame=0;}
- setMode(mode){this.mode=mode;this.controls.autoRotate=mode==='orbit';this.road.visible=mode==='drive';this.setLighting(this.lighting||'studio');if(this.car){this.car.position.y=0;this.car.rotation.z=0;}this.controls.update();}
- setSpeed(speed){this.speed=speed;}
- setLighting(name){this.lighting=name;const settings={studio:{bg:'#eae5dd',key:'#fff6e9',fill:'#d8e4ef',exposure:.95,keyPower:2.3,hemi:1.2,rim:1.1,env:.65},sunset:{bg:'#d9b8a2',key:'#ffcf97',fill:'#b9c4eb',exposure:.88,keyPower:2.6,hemi:.8,rim:.9,env:.5},night:{bg:'#202736',key:'#abc4ff',fill:'#dfbddc',exposure:.9,keyPower:1.6,hemi:.35,rim:.7,env:.2}}[name];this.scene.background.set(settings.bg);this.scene.fog.color.set(settings.bg);this.scene.environmentIntensity=settings.env;this.key.color.set(settings.key);this.key.intensity=settings.keyPower;this.rim.color.set(settings.fill);this.rim.intensity=settings.rim;this.hemi.intensity=settings.hemi;this.renderer.toneMappingExposure=settings.exposure;this.floor.material.color.set(this.mode==='drive'?(name==='night'?'#18251e':'#6e7c64'):name==='night'?'#252936':name==='sunset'?'#bcaa96':'#e4ddd2');this.lamps.forEach(m=>m.emissiveIntensity=name==='night'?2.2:.65);}
+ setLighting(name){this.lighting=name;const settings={studio:{bg:'#eae5dd',key:'#fff6e9',fill:'#d8e4ef',exposure:.95,keyPower:2.3,hemi:1.2,rim:1.1,env:.65},sunset:{bg:'#d9b8a2',key:'#ffcf97',fill:'#b9c4eb',exposure:.88,keyPower:2.6,hemi:.8,rim:.9,env:.5},night:{bg:'#202736',key:'#abc4ff',fill:'#dfbddc',exposure:.9,keyPower:1.6,hemi:.35,rim:.7,env:.2}}[name];this.scene.background.set(settings.bg);this.scene.fog.color.set(settings.bg);this.scene.environmentIntensity=settings.env;this.key.color.set(settings.key);this.key.intensity=settings.keyPower;this.rim.color.set(settings.fill);this.rim.intensity=settings.rim;this.hemi.intensity=settings.hemi;this.renderer.toneMappingExposure=settings.exposure;this.floor.material.color.set(name==='night'?'#252936':name==='sunset'?'#bcaa96':'#e4ddd2');this.lamps.forEach(m=>m.emissiveIntensity=name==='night'?2.2:.65);}
  resetCamera(){this.controls.target.set(0,.77,0);this.camera.position.set(-4.25,1.38,-4.85).multiplyScalar(this.fitScale||1).add(this.controls.target);this.controls.update();}
  resize(){const box=this.host.getBoundingClientRect();if(box.width<1||box.height<1)return;const aspect=box.width/box.height,nextScale=Math.max(1,Math.min(1.8,1.35/aspect)),priorScale=this.fitScale||1;if(nextScale!==priorScale){this.camera.position.sub(this.controls.target).multiplyScalar(nextScale/priorScale).add(this.controls.target);this.fitScale=nextScale;}this.camera.aspect=aspect;this.camera.updateProjectionMatrix();this.renderer.setSize(box.width,box.height,false);}
- renderFrame(time){this.raf=requestAnimationFrame(this.renderFrame);if(!this.active)return;const dt=this.lastFrame?Math.min((time-this.lastFrame)/1000,.05):0;this.lastFrame=time;this.elapsed+=dt;if(this.mode==='drive'){const metersPerSecond=this.speed/3.6;for(const wheel of this.wheels)wheel.rotation.x-=metersPerSecond/.36*dt;for(const item of this.moving){item.mesh.position.z+=metersPerSecond*dt;if(item.mesh.position.z>65)item.mesh.position.z-=140;}if(this.car){this.car.position.y=Math.sin(this.elapsed*7)*.003;this.car.rotation.z=Math.sin(this.elapsed*1.6)*.002;}}this.controls.update(dt);this.renderer.render(this.scene,this.camera);}
+ renderFrame(){this.raf=requestAnimationFrame(this.renderFrame);if(!this.active)return;this.controls.update();this.renderer.render(this.scene,this.camera);}
  dispose(){cancelAnimationFrame(this.raf);this.observer.disconnect();this.controls.dispose();this.texture?.dispose();this.doorTexture?.dispose();this.panelLookup?.dispose();this.surfaceLookup?.dispose();this.environment.dispose();this.renderer.dispose();}
 }
+

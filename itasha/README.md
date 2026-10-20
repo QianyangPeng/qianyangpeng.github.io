@@ -1,26 +1,19 @@
-# Wrap Atelier / 车衣画廊
+# Model Y Juniper 车衣
 
-Static GitHub Pages gallery for Model Y Juniper Premium digital wrap designs.
+适用于 2026 Model Y Juniper Premium 的 Toybox 数字车衣浏览与下载页。当前恢复为早期的 4 款东方 Project 设计：魔理沙《星轨》、咲夜《静止时刻》、幽幽子《花逝》、紫《隙间》。
 
-- Chinese topic filters, character/title search, local favorites and per-design sharing URLs.
-- Download the original verified 1024² PNG directly.
-- Drag/zoom 3D Juniper preview, turntable mode, moving road/wheels and three lighting conditions.
-- AI concept renders and actual atlas inspection sheets have separate view tabs.
-- All runtime scripts and model assets are served locally; no CDN or API key required.
+- 搜索角色或设计名称，按主题筛选并收藏。
+- 可拖动旋转、滚轮缩放静态 3D 车模；可切换光线。
+- 查看 PNG 展开图，单张或打包下载原始 1024 × 1024 PNG。
+- 每款车衣的 `preview-doors.webp` 是从已验证官方 UV 图提取的网页 3D 预览贴图，不是 Tesla 导入文件。
 
-Open `/itasha/` on a web server. Opening `index.html` as a `file://` URL will not work because the viewer loads ES modules and a GLB.
+在网页服务器中打开 `/itasha/`。直接用 `file://` 打开无法加载 3D 模块和车模文件。
 
-The site's 3D vehicle is an artist-authored 2025 Juniper, not Tesla's proprietary dashboard mesh. Its original UVs are empty. The viewer maps its 20 independent exterior panels individually; lower trim and interior pieces remain dark. Decorative panels read the downloadable atlas. Portrait-bearing doors use the exact source crop recorded by the export manifest, before the official panel mask is applied, and share a uniform-scale planar projection across both doors. This avoids stretching faces to fit the different community model. The 3D view is an artistic placement preview; use the separate actual-atlas inspection tab for download geometry, and the vehicle for final placement. It is not physical vinyl production geometry.
+3D 使用社区制作的 Juniper 模型，并逐个映射其 20 个车身外壳。它只用于展示位置，不代表实车车机中的最终裁切、接缝或物理贴膜文件。PNG 车机文件按 Tesla Premium 模板导出；导入前请查看 PNG 展开图。
 
-`assets/model/panel-mapping.json` identifies the two mapped meshes and their 20 shells; `panel-lookup.bin` and `surface-lookup.bin` contain contour coordinates. `preview-doors.webp` is a website-only texture assembled mechanically from each design's documented left/right source crops; it is not a Tesla import file. All 78 downloadable PNG files are unchanged by this mapping correction. USB downloads are grouped into ten archives of at most ten designs.
+## 致谢
 
-`catalog.json` indexes ready designs. Each record points to its original PNG, a compressed concept image, an inspection image and a thumbnail. Add designs only after checking their source manifest. Original generation prompts and source images are retained in the separate full design collection.
-
-## Credits
-
-- Model: **2025 Tesla Model Y** by [BloxBloger](https://sketchfab.com/BloxBloger), [original listing](https://sketchfab.com/3d-models/2025-tesla-model-y-619601e7800d418da5922c4fa7833f74), [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Noncommercial use; preserve attribution. GLB conversion and material naming by [Tesla Studio](https://github.com/aditano/tesla-studio/tree/main/public/models/juniper). Website-specific projection, lighting and wheel animation are additional adaptations. See `assets/model/CREDITS.md`.
-- Three.js r180, MIT. Vendored license at `vendor/three/LICENSE`.
-- Official wrap template: [Tesla custom-wraps](https://github.com/teslamotors/custom-wraps/tree/master/modely-2025-premium).
-- Wrap art and concept images: built-in ImageGen, individually art-directed and reviewed. Fan art characters belong to their respective owners. This is a personal noncommercial gallery, not an official collaboration.
-
-Only `itasha/` is part of this change; the personal homepage and other projects are not replaced.
+- 车模：**2025 Tesla Model Y** by [BloxBloger](https://sketchfab.com/BloxBloger), [原始模型](https://sketchfab.com/3d-models/2025-tesla-model-y-619601e7800d418da5922c4fa7833f74), [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)。模型转换及材质命名 by [Tesla Studio](https://github.com/aditano/tesla-studio/tree/main/public/models/juniper)。详见 `assets/model/CREDITS.md`。
+- Three.js r180，MIT；许可文件位于 `vendor/three/LICENSE`。
+- Tesla 车衣模板：[teslamotors/custom-wraps](https://github.com/teslamotors/custom-wraps/tree/master/modely-2025-premium)。
+- 原画及概念图：内置 ImageGen。角色版权归其所有者，本页面为个人非商业同人展示。
