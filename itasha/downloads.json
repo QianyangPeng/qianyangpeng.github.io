@@ -1,11 +1,92 @@
 [
   {
-    "href": "downloads/touhou-USB-01.zip",
-    "bytes": 1225548,
+    "count": 3,
+    "bytes": 1237397,
+    "href": "downloads/peppa-USB-01.zip",
     "part": 1,
-    "sha256": "5f33353629bd62fcaccdc0f6d4c40d582519ec7650e447f672b124e2e881efd6",
+    "label": "小猪佩奇",
+    "category": "peppa",
+    "sha256": "b0da2a62b689f1f56a5c67986178726b8e33d2eb1d4a69885b9289be0aed611c"
+  },
+  {
+    "count": 10,
+    "bytes": 5055105,
+    "href": "downloads/genshin-USB-01.zip",
+    "part": 1,
+    "label": "原神",
+    "category": "genshin",
+    "sha256": "fd4f8a069144e192ba24bcb6df0d5b5b04909dbaf1585ef454961506f89fbd3c"
+  },
+  {
+    "count": 10,
+    "bytes": 5112908,
+    "href": "downloads/genshin-USB-02.zip",
+    "part": 2,
+    "label": "原神",
+    "category": "genshin",
+    "sha256": "8e95be0d7ba9df56b1796809dd5312ace4116e7c3af145b28127e26f58768c76"
+  },
+  {
+    "count": 10,
+    "bytes": 9411834,
+    "href": "downloads/vocaloid-USB-01.zip",
+    "part": 1,
+    "label": "VOCALOID",
+    "category": "vocaloid",
+    "sha256": "e0290507567482e145762bbd9971d558d9fb9ad8b14d00fe36b59aee1b512fc9"
+  },
+  {
+    "count": 10,
+    "bytes": 9239003,
+    "href": "downloads/vocaloid-USB-02.zip",
+    "part": 2,
+    "label": "VOCALOID",
+    "category": "vocaloid",
+    "sha256": "7f4c340cee284e2e0d7143e51d59ab5df42de9010777f8d71c9c4bf9cf6a5028"
+  },
+  {
+    "count": 5,
+    "bytes": 2213663,
+    "href": "downloads/seattle-USB-01.zip",
+    "part": 1,
+    "label": "西雅图",
+    "category": "seattle",
+    "sha256": "3a9255dc06a6efe983082986610fc9a2bc678c4ec64bb04fd132881f7589782a"
+  },
+  {
+    "count": 5,
+    "bytes": 4724743,
+    "href": "downloads/wuhan-USB-01.zip",
+    "part": 1,
+    "label": "武汉",
+    "category": "wuhan",
+    "sha256": "7568b50027e71978ab4bfa8b634da87f9a1e02c7680ae25871a204120cb31e4c"
+  },
+  {
+    "count": 5,
+    "bytes": 2526910,
+    "href": "downloads/china-USB-01.zip",
+    "part": 1,
+    "label": "中国",
+    "category": "china",
+    "sha256": "3e086bfc1557299939462af5c4f5a1cd29cc8a3b4cb88affe6a9c893a412b734"
+  },
+  {
+    "count": 10,
+    "bytes": 6275034,
+    "href": "downloads/touhou-USB-01.zip",
+    "part": 1,
+    "label": "东方 Project",
     "category": "touhou",
-    "count": 4,
-    "label": "东方 Project"
+    "sha256": "b71e1eb667e0d449f13681b0d37faf835c828a517fb8fd607f49b66720ccac96"
+  },
+  {
+    "count": 10,
+    "bytes": 6543897,
+    "href": "downloads/touhou-USB-02.zip",
+    "part": 2,
+    "label": "东方 Project",
+    "category": "touhou",
+    "sha256": "3819cb7a6d7ab45dc78bede5d8d1a26a89f839569ac456fdb5f940e1f67658f4"
   }
 ]
